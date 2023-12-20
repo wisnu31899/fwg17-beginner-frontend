@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom"
-import { FiCoffee,FiUser,FiMail,FiLock,FiEyeOff,FiFacebook,FiGlobe } from "react-icons/fi"
+import React from 'react'
+import { FiCoffee,FiUser,FiMail,FiLock,FiEyeOff, FiEye,FiFacebook,FiGlobe } from "react-icons/fi"
 
 const Register = () => {
+    const [passwordVisible, setPasswordVisible] = React.useState(false)
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible)
+    }
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = React.useState(false)
+    const toggleConfirmPasswordVisibility = () => {
+        setConfirmPasswordVisible(!confirmPasswordVisible)
+    }
+
+    
     return (
         <>
             <header className="h-screen flex">
-                <div className="hidden md:block w-2/6 bg-[url(.././assets/bg-register.png)] bg-cover bg-no-repeat bg-center"></div>
+                <div className="hidden md:block w-2/6 bg-[url(.././assets/images/bg-register.png)] bg-cover bg-no-repeat bg-center"></div>
                 <div className=" flex flex-1 justify-center items-center">
                     <form className="w-4/5 flex flex-col gap-3" action="">
                         <div className="flex items-center gap-5">
@@ -31,22 +42,26 @@ const Register = () => {
                         <label className="flex flex-col gap-[5px]" htmlFor="password">
                             <div className="text-[#0B132A] font-bold">Password</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
-                            <div><FiLock/></div>
-                                <input className="w-full text-[black]" id="password" name="password" type="password" placeholder="Enter Your Password" />
-                                <div><FiEyeOff/></div>
+                                <div><FiLock /></div>
+                                <input className="w-full text-[black]" id="password" name="password" type={passwordVisible ? "text" : "password"} placeholder="Enter Your Password" />
+                                <div onClick={togglePasswordVisibility}>
+                                    {passwordVisible ? <FiEye /> : <FiEyeOff />}
+                                </div>
                             </div>
                         </label>
-                        <label className="flex flex-col gap-[5px]" htmlFor="password">
+                        <label className="flex flex-col gap-[5px]" htmlFor="confirmpassword">
                             <div className="text-[#0B132A] font-bold">Confirm Password</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
-                            <div><FiLock/></div>
-                                <input className="w-full text-[black]" id="password" name="password" type="password" placeholder="Enter Your Confirm Password" />
-                                <div><FiEyeOff/></div>
+                                <div><FiLock /></div>
+                                <input className="w-full text-[black]" id="confirmpassword" name="confirmpassword" type={confirmPasswordVisible ? "text" : "password"} placeholder="Enter Your Confirm Password" />
+                                <div onClick={toggleConfirmPasswordVisibility}>
+                                    {confirmPasswordVisible ? <FiEye /> : <FiEyeOff />}
+                                </div>
                             </div>
                         </label>
-                        <div><button className="py-4 bg-orange-500 w-full text-black font-bold">Register</button></div>
+                        <div><Link className="hover:text-[#FF8906]" to="/login"><button className="py-4 bg-orange-500 w-full text-black font-bold">Register</button></Link></div>
                         <div className="flex justify-center">
-                            <div className="text-[#4F5665]">Have An Account? <Link className="text-orange-500" to="#">Login</Link></div>
+                            <div className="text-[#4F5665]">Have An Account? <Link className="text-orange-500" to="/login">Login</Link></div>
                         </div>
                         <div className="flex items-center -mt-3">
                             <div className="flex-1 w-full h-px bg-[#DEDEDE]"></div>

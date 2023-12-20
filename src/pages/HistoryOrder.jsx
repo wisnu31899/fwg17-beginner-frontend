@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import { FiCalendar, FiChevronDown, FiRepeat, FiRefreshCcw } from "react-icons/fi"
+import ho1 from "../assets/images/ho1.png"
 
 const HistoryOrder = () => {
     return (
@@ -24,13 +26,13 @@ const HistoryOrder = () => {
                             </div>
                             <div
                                 className="h-[60px] flex justify-between items-center bg-[#E8E8E84D] gap-[10px] px-[10px] py-[10px]">
-                                <div><i data-feather="calendar"></i></div>
+                                <div><FiCalendar size={20}/></div>
                                 <div className="text-[#0B132A] font-bold">January2023</div>
-                                <div><i data-feather="chevron-down"></i></div>
+                                <div><FiChevronDown/></div>
                             </div>
                         </div>
                         <div className=" flex justify-between bg-[#E8E8E84D] gap-[10px] px-[10px] py-[10px]">
-                            <div className=""><img width="100px" height="100px" src="./asset/image/ho1.png" alt="" /></div>
+                            <div className=""><img width="100px" height="100px" src={ho1} alt="" /></div>
                             <div className="flex w-[140px] flex-col gap-[5px]">
                                 <div className="flex items-center gap-[10px]">
                                     <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
@@ -44,32 +46,32 @@ const HistoryOrder = () => {
                                 <div className="text-[#0B132A] font-bold">#12354-09893</div>
                                 <div><Link className="text-[#FF8906] className
                                 Properties
-                                underline" to="/login">Views Order Detail</Link></div>
+                                underline" to="/detailorder">Views Order Detail</Link></div>
                             </div>
                             <div className="flex w-[130px] gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="calendar"></i></div>
+                                    <div><FiCalendar/></div>
                                     <div>Date</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">23 January 2023</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="repeat"></i></div>
+                                    <div><FiRepeat/></div>
                                     <div>Total</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">Idr 40.000</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="refresh-ccw"></i></div>
+                                    <div><FiRefreshCcw/></div>
                                     <div>Status</div>
                                 </div>
                                 <div className="h-[25px] w-[110px] flex justify-center items-center text-[#FF8906] rounded-[24px] bg-orange-200">On Progress</div>
                             </div>
                         </div>
                         <div className=" flex justify-between bg-[#E8E8E84D] gap-[10px] px-[10px] py-[10px]">
-                            <div className=""><img width="100px" height="100px" src="./asset/image/ho1.png" alt="" /></div>
+                            <div className=""><img width="100px" height="100px" src={ho1} alt="" /></div>
                             <div className="flex w-[140px] flex-col gap-[5px]">
                                 <div className="flex items-center gap-[10px]">
                                     <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
@@ -83,32 +85,32 @@ const HistoryOrder = () => {
                                 <div className="text-[#0B132A] font-bold">#12354-09893</div>
                                 <div><Link className="text-[#FF8906] className
                                 Properties
-                                underline" to="/login">Views Order Detail</Link></div>
+                                underline" to="#">Views Order Detail</Link></div>
                             </div>
                             <div className="flex w-[130px] gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="calendar"></i></div>
+                                    <div><FiCalendar/></div>
                                     <div>Date</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">23 January 2023</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="repeat"></i></div>
+                                    <div><FiRepeat/></div>
                                     <div>Total</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">Idr 40.000</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="refresh-ccw"></i></div>
+                                    <div><FiRefreshCcw/></div>
                                     <div>Status</div>
                                 </div>
                                 <div className="h-[25px] w-[110px] flex justify-center items-center text-[#FF8906] rounded-[24px] bg-orange-200">On Progress</div>
                             </div>
                         </div>
                         <div className=" flex justify-between bg-[#E8E8E84D] gap-[10px] px-[10px] py-[10px]">
-                            <div className=""><img width="100px" height="100px" src="./asset/image/ho1.png" alt="" /></div>
+                            <div className=""><img width="100px" height="100px" src={ho1} alt="" /></div>
                             <div className="flex w-[140px] flex-col gap-[5px]">
                                 <div className="flex items-center gap-[10px]">
                                     <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
@@ -122,32 +124,32 @@ const HistoryOrder = () => {
                                 <div className="text-[#0B132A] font-bold">#12354-09893</div>
                                 <div><Link className="text-[#FF8906] className
                                 Properties
-                                underline" to="/login">Views Order Detail</Link></div>
+                                underline" to="#">Views Order Detail</Link></div>
                             </div>
                             <div className="flex w-[130px] gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="calendar"></i></div>
+                                    <div><FiCalendar/></div>
                                     <div>Date</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">23 January 2023</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="repeat"></i></div>
+                                    <div><FiRepeat/></div>
                                     <div>Total</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">Idr 40.000</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="refresh-ccw"></i></div>
+                                    <div><FiRefreshCcw/></div>
                                     <div>Status</div>
                                 </div>
                                 <div className="h-[25px] w-[110px] flex justify-center items-center text-[#FF8906] rounded-[24px] bg-orange-200">On Progress</div>
                             </div>
                         </div>
                         <div className=" flex justify-between bg-[#E8E8E84D] gap-[10px] px-[10px] py-[10px]">
-                            <div className=""><img width="100px" height="100px" src="./asset/image/ho1.png" alt="" /></div>
+                            <div className=""><img width="100px" height="100px" src={ho1} alt="" /></div>
                             <div className="flex w-[140px] flex-col gap-[5px]">
                                 <div className="flex items-center gap-[10px]">
                                     <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
@@ -161,25 +163,25 @@ const HistoryOrder = () => {
                                 <div className="text-[#0B132A] font-bold">#12354-09893</div>
                                 <div><Link className="text-[#FF8906] className
                                 Properties
-                                underline" to="/login">Views Order Detail</Link></div>
+                                underline" to="#">Views Order Detail</Link></div>
                             </div>
                             <div className="flex w-[130px] gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="calendar"></i></div>
+                                    <div><FiCalendar/></div>
                                     <div>Date</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">23 January 2023</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="repeat"></i></div>
+                                    <div><FiRepeat/></div>
                                     <div>Total</div>
                                 </div>
                                 <div className="text-[#0B132A] font-bold">Idr 40.000</div>
                             </div>
                             <div className="flex flex-1 gap-[5px] flex-col">
                                 <div className="flex items-center gap-[10px]">
-                                    <div><i data-feather="refresh-ccw"></i></div>
+                                    <div><FiRefreshCcw/></div>
                                     <div>Status</div>
                                 </div>
                                 <div className="h-[25px] w-[110px] flex justify-center items-center text-[#FF8906] rounded-[24px] bg-orange-200">On Progress</div>
@@ -207,7 +209,7 @@ const HistoryOrder = () => {
                             </svg></div>
                             <div className="text-[18px] font-bold">Send Us Message</div>
                             <div>if your unable to find answer or find your product quickly, please describe your problem and tell us. we will give you solution.</div>
-                            <div><button className="h-[40px] rounded-[6px] bg-[#FF8906] text-[black] font-bold w-full" type="submit">Send Message</button></div>
+                            <div><Link to="/message"><button className="h-[40px] rounded-[6px] bg-[#FF8906] text-[black] font-bold w-full" type="submit">Send Message</button></Link></div>
                         </div>
                     </div>
                 </div>

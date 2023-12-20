@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import { FiCalendar, FiChevronDown, FiRepeat, FiRefreshCcw,FiUser, FiPlus, FiPlusCircle, FiMail, FiMapPin } from "react-icons/fi"
+import cp1 from "../assets/images/cphead1.png"
+import BRI from "../assets/images/BRI.svg"
+import BCA from "../assets/images/BCA.svg"
+import OVO from "../assets/images/OVO.svg"
+import PAYPAL from "../assets/images/PAYPAL.svg"
+import GOPAY from "../assets/images/GOPAY.svg"
+import DANA from "../assets/images/DANA.png"
 
 const CheckoutProduct = () => {
     return (
@@ -14,10 +22,10 @@ const CheckoutProduct = () => {
                             <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
                             <div><button
                                 className="flex justify-center items-center gap-[10px] rounded-[6px] bg-[#FF8906] w-[125px] h-[40px] font-bold text-[#0B132A]"
-                                type="submit"><i data-feather="plus"></i>Add Menu</button></div>
+                                type="submit"><FiPlus/>Add Menu</button></div>
                         </div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src="./asset/image/cphead1.png" alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
@@ -37,10 +45,10 @@ const CheckoutProduct = () => {
                                     <div className="text-[22px] font-bold text-[#FF8906]">IDR 20.000</div>
                                 </div>
                             </div>
-                            <div className="mr-[20px] text-[red]"><i data-feather="plus-circle"></i></div>
+                            <div className="mr-[20px] text-[red]"><FiPlusCircle/></div>
                         </div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src="./asset/image/cphead1.png" alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
@@ -60,28 +68,34 @@ const CheckoutProduct = () => {
                                     <div className="text-[22px] font-bold text-[#FF8906]">IDR 20.000</div>
                                 </div>
                             </div>
-                            <div className="mr-[20px] text-[red]"><i data-feather="plus-circle"></i></div>
+                            <div className="mr-[20px] text-[red]"><FiPlusCircle/></div>
                         </div>
                         <div className=" flex flex-col gap-[20px]">
                             <div>Payment Info & Delivery</div>
                             <form className="w-full flex flex-col gap-5" action="">
-                                <div className="flex gap-3 flex-col">
-                                    <label className=" text-[#0B132A] font-bold" htmlFor="email">Email</label>
-                                    <input className="text-[#4F5665] border-solid border-2 rounded-lg px-16 py-3" htmlFor="email" id="email" type="email" placeholder="Enter Your Email" />
-                                    <div className="text-[#4F5665] -mt-[40px] ml-4" ><i data-feather="mail"></i></div>
-                                </div>
-                                <div className="flex gap-3 flex-col mt-5">
-                                    <label className="text-[#0B132A] font-bold" htmlFor="fullname">Full Name</label>
-                                    <input className="text-[#4F5665] border-solid border-2 rounded-lg px-16 py-3" htmlFor="fullname" id="fullname" type="text" placeholder="Enter Your Full Name" />
-                                    <div className="text-[#4F5665] -mt-[40px] ml-4"><i data-feather="user"></i></div>
-                                </div>
-                                <div className="flex gap-3 flex-col mt-2">
-                                    <label className="mt-3 text-[#0B132A] font-bold" htmlFor="address">Address</label>
-                                    <input className="text-[#4F5665] border-solid border-2 rounded-lg px-16 py-3" htmlFor="address" id="address" type="text" placeholder="Enter Your address" />
-                                    <div className="text-[#4F5665] -mt-[40px] ml-4" ><i data-feather="map-pin"></i></div>
-                                </div>
+                            <label className="flex flex-col gap-[5px]" htmlFor="email">
+                            <div className="text-[#0B132A] font-bold">Email</div>
+                            <div className="border h-[40px] rounded flex items-center px-4 gap-2">
+                            <div ><FiMail/></div>
+                                <input className="w-full  text-[black]" id="email" name="email" type="email" placeholder="Enter Your Email" />
+                            </div>
+                        </label>
+                                <label className="flex flex-col gap-[5px]" htmlFor="name">
+                            <div className="text-[#0B132A] font-bold">Full Name</div>
+                            <div className="border h-[40px] rounded flex items-center px-4 gap-2">
+                            <div className=""><FiUser/></div>
+                                <input className="w-full  text-[black]" id="name" name="name" type="text" placeholder="Enter Your Full Name" />
+                            </div>
+                        </label>
+                        <label className="flex flex-col gap-[5px]" htmlFor="address">
+                            <div className="text-[#0B132A] font-bold">Address</div>
+                            <div className="border h-[40px] rounded flex items-center px-4 gap-2">
+                            <div ><FiMapPin/></div>
+                                <input className="w-full  text-[black]" id="address" name="address" type="text" placeholder="Enter Your Address" />
+                            </div>
+                        </label>
                             </form>
-                            <div className="text-[#0B132A] font-bold mt-5">Delivery</div>
+                            <div className="text-[#0B132A] font-bold">Delivery</div>
                             <div className="flex justify-between gap-[30px]">
                                 <div className="flex-1"><button className=" w-full h-[40px] border-2 font-bold hover:border-[#FF8906]"
                                     type="submit">Dine In</button></div>
@@ -114,15 +128,15 @@ const CheckoutProduct = () => {
                                 <div className="font-bold">Sub Total</div>
                                 <div className="font-bold text-[#0B132A]">Idr. 44.000</div>
                             </div>
-                            <div><button className=" flex justify-center items-center rounded-[6px] bg-[#FF8906] w-full h-[40px] font-bold text-[#0B132A]" type="submit">Checkout</button></div>
+                            <div><Link to="/historyorder"><button className=" flex justify-center items-center rounded-[6px] bg-[#FF8906] w-full h-[40px] font-bold text-[#0B132A]" type="submit">Checkout</button></Link></div>
                             <div>We Accept</div>
                             <div className="flex justify-between">
-                                <div><Link to="/#"><img src="./asset/icon/BRI.svg" alt="" /></Link></div>
-                                <div><Link to="/#"><img src="./asset/icon/DANA.png" alt="" /></Link></div>
-                                <div><Link to="/#"><img src="./asset/icon/BCA.svg" alt="" /></Link></div>
-                                <div><Link to="/#"><img src="./asset/icon/GOPAY.svg" alt="" /></Link></div>
-                                <div><Link to="/#"><img src="./asset/icon/OVO.svg" alt="" /></Link></div>
-                                <div><Link to="/#"><img src="./asset/icon/PAYPAL.svg" alt="" /></Link></div>
+                                <div><Link to="/#"><img src={BRI} alt="" /></Link></div>
+                                <div><Link to="/#"><img src={DANA} alt="" /></Link></div>
+                                <div><Link to="/#"><img src={BCA} alt="" /></Link></div>
+                                <div><Link to="/#"><img src={GOPAY} alt="" /></Link></div>
+                                <div><Link to="/#"><img src={OVO} alt="" /></Link></div>
+                                <div><Link to="/#"><img src={PAYPAL} alt="" /></Link></div>
                             </div>
                             <div>*Get Discount if you pay with Bank Central Asia</div>
                         </div>

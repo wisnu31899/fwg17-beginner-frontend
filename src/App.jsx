@@ -16,7 +16,8 @@ import DetailProduct from "./pages/DetailProduct"
 import DetailOrder from './pages/DetailOrder'
 import CheckoutProduct from "./pages/CheckoutProduct"
 import Profile from "./pages/Profile"
-import Chat from "./pages/Chat"
+import Message from "./pages/Message"
+
 
 
 const router = createBrowserRouter([
@@ -62,8 +63,8 @@ const router = createBrowserRouter([
   element: <Profile />
 },
 {
-  path: '/chat',
-  element: <Chat />
+  path: '/message',
+  element: <Message />
 }
 ])
 

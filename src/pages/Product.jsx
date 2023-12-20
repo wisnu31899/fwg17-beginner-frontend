@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import { FiCoffee,FiUser,FiMail,FiLock,FiEyeOff,FiFacebook,FiGlobe, FiCircle, FiCheck, FiStar, FiShoppingCart, FiArrowRightCircle } from "react-icons/fi"
+import { FiCircle, FiCheck, FiStar, FiShoppingCart, FiArrowRightCircle } from "react-icons/fi"
 import img1sec1 from "../assets/images/ps1-1.png"
 import img1sec2 from "../assets/images/ps1-2.png"
 

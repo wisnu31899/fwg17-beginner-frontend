@@ -1,6 +1,8 @@
 // import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import { FiShoppingCart, FiStar, FiThumbsUp, FiMinus, FiPlus, FiUser, FiMapPin, FiPhoneCall, FiCreditCard, FiTruck, FiRepeat } from "react-icons/fi"
+import cp1 from "../assets/images/cphead1.png"
 
 const DetailOrder = () => {
     return (
@@ -18,27 +20,27 @@ const DetailOrder = () => {
                         </div>
                         <div className="flex flex-col">
                             <div className="flex justify-between pb-[15px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="user"></i>Full Name</div>
+                                <div className="flex gap-[10px]"><FiUser className="mt-[3px]"/>Full Name</div>
                                 <div className="text-[#0B132A] font-bold">Ghaluh Wizard Anggoro</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="map-pin"></i>Address</div>
+                                <div className="flex gap-[10px]"><FiMapPin className="mt-[3px]"/>Address</div>
                                 <div className="text-[#0B132A] font-bold">Griya bandung indah</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="phone-call"></i>Phone</div>
+                                <div className="flex gap-[10px]"><FiPhoneCall className="mt-[3px]"/>Phone</div>
                                 <div className="text-[#0B132A] font-bold">082116304338</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="credit-card"></i>Payment Method</div>
+                                <div className="flex gap-[10px]"><FiCreditCard className="mt-[3px]"/>Payment Method</div>
                                 <div className="text-[#0B132A] font-bold">Cash</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="truck"></i>Shipping</div>
+                                <div className="flex gap-[10px]"><FiTruck className="mt-[3px]"/>Shipping</div>
                                 <div className="text-[#0B132A] font-bold">Dine In</div>
                             </div>
                             <div className="flex justify-between items-center py-[10px] border-b-2">
-                                <div className="flex gap-[10px]"><i data-feather="repeat"></i>Status</div>
+                                <div className="flex gap-[10px]"><FiRepeat className="mt-[3px]"/>Status</div>
                                 <div className="p-[10px] rounded-[20px] bg-green-100  text-[#00A700] font-bold">Done</div>
                             </div>
                             <div className="flex justify-between py-[20px]">
@@ -46,14 +48,13 @@ const DetailOrder = () => {
                                 <div className="text-[#FF8906] font-bold">Idr 40.000</div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div className="flex flex-1 justify-center md:justify-start pt-[120px]">
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src="./asset/image/cphead1.png" alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
@@ -75,7 +76,7 @@ const DetailOrder = () => {
                             </div>
                         </div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src="./asset/image/cphead1.png" alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">

@@ -5,7 +5,7 @@ const Forgot_password = () => {
     return (
         <>
             <header className="h-screen flex">
-                <div className="hidden md:block w-2/6 bg-[url(.././assets/bg-forgotpassword.png)] bg-cover bg-no-repeat bg-center"></div>
+                <div className="hidden md:block w-2/6 bg-[url(.././assets/images/bg-forgotpassword.png)] bg-cover bg-no-repeat bg-center"></div>
                 <div className=" flex flex-1 justify-center items-center">
                     <form className="w-4/5 flex flex-col gap-3" action="">
                         <div className="flex items-center gap-5">

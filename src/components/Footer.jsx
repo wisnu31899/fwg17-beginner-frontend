@@ -1,3 +1,7 @@
+import { Link } from "react-router-dom"
+import { FiCoffee, FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi"
+
+
 const Navbar = () => {
     return (
         <>
@@ -5,7 +9,7 @@ const Navbar = () => {
         <div className="max-w-[500px] flex justify-center">
             <div className="flex flex-col w-[78%] md:w-[70%] gap-[30px]">
                 <div className="flex items-center text-[#8E6447] gap-[10px]">
-                    <div><i className="fill-[#8E6447] " data-feather="coffee"></i></div>
+                    <div><FiCoffee className="fill-[#8E6447]"/></div>
                     <div>
                         <h1 className="text-[20px] font-bold">Coffee Shop</h1>
                     </div>
@@ -18,21 +22,21 @@ const Navbar = () => {
         <div className="flex-1 flex justify-center">
             <div className="flex flex-col w-[80%] gap-[10px]">
                 <div className="mb-[10px] text-[black] font-bold">Product</div>
-                <div><a className="hover:text-[#FF8906]" href="#">Our Product</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Pricing</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Locations</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Countries</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Blog</a></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Product</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Pricing</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Locations</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Countries</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Blog</Link></div>
             </div>
         </div>
         <div className="flex-1 flex justify-center">
             <div className="flex flex-col w-[80%] gap-[10px]">
                 <div className="mb-[10px] text-[black] font-bold">Engage</div>
-                <div><a className="hover:text-[#FF8906]" href="#">Patner</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">FAQ</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">About Us</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Privacy Policy</a></div>
-                <div><a className="hover:text-[#FF8906]" href="#">Terms of Service</a></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Patner</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">FAQ</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">About Us</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Privacy Policy</Link></div>
+                <div><Link className="hover:text-[#FF8906]" to="#">Terms of Service</Link></div>
             </div>
         </div>
         <div className=" flex-1 flex justify-center">
@@ -41,15 +45,15 @@ const Navbar = () => {
                 <div className="flex gap-[20px]">
                     <div><button
                             className="h-[35px] w-[35px] border-2 border-[#FF8906] hover:bg-[#FF8906] rounded-full flex justify-center items-center"
-                            type="submit"><i className="text-[black] fill-[black]" data-feather="facebook"></i></button>
+                            type="submit"><FiFacebook className="text-[black] fill-[black]"/></button>
                     </div>
                     <div><button
                             className="h-[35px] w-[35px] border-2 border-[#FF8906] hover:bg-[#FF8906] rounded-full flex justify-center items-center"
-                            type="submit"><i className="text-[black] fill-[black]" data-feather="twitter"></i></button>
+                            type="submit"><FiTwitter className="text-[black] fill-[black]"/></button>
                     </div>
                     <div><button
                             className="h-[35px] w-[35px] border-2 border-[#FF8906] hover:bg-[#FF8906] rounded-full flex justify-center items-center"
-                            type="submit"><i className="text-[black]" data-feather="instagram"></i></button></div>
+                            type="submit"><FiInstagram className="text-[black]"/></button></div>
                 </div>
             </div>
         </div>
