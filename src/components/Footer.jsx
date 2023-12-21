@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <>
     <footer className="gap-[20px] flex flex-col md:flex-row justify-between text-[#4F5665] py-[50px] bg-[#F8F8F8]">
-        <div className="max-w-[500px] flex justify-center">
+        <div className="max-w-[500px] w-full flex justify-center">
             <div className="flex flex-col w-[78%] md:w-[70%] gap-[30px]">
                 <div className="flex items-center text-[#8E6447] gap-[10px]">
                     <div><FiCoffee className="fill-[#8E6447]"/></div>

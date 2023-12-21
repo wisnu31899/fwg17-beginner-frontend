@@ -9,11 +9,6 @@ const Login = () => {
     const [token, setToken] = React.useState(null)
     const [errorMessage, setErrorMessage] = React.useState(null)
 
-    const [passwordVisible, setPasswordVisible] = React.useState(false)
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible)
-    }
-
     const processLogin = async (even) => {
         even.preventDefault()
         const { value: email } = even.target.email
@@ -47,6 +42,12 @@ const Login = () => {
             }
         }
     }
+
+    const [passwordVisible, setPasswordVisible] = React.useState(false)
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible)
+    }
+
     return (
         <>
             <header className="h-screen flex">

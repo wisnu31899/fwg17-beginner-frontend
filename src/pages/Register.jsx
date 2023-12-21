@@ -1,8 +1,57 @@
 import { Link } from "react-router-dom"
 import React from 'react'
 import { FiCoffee,FiUser,FiMail,FiLock,FiEyeOff, FiEye,FiFacebook,FiGlobe } from "react-icons/fi"
+import axios from "axios"
 
 const Register = () => {
+    const inputFullName = React.useRef()
+    const inputEmail = React.useRef()
+    const inputPassword = React.useRef()
+    const inputConfirmPassword = React.useRef()
+    const [successMessage, setSuccessMessage] = React.useState('')
+    const [errorMessage, setErrorMessage] = React.useState('')
+
+    const processRegister = async (even) => {
+        even.preventDefault()
+        const {value: fullName} = even.target.fullName
+        const {value: email} = even.target.email
+        const {value: password} = even.target.password
+        const form = new URLSearchParams()
+        form.append('fullName', fullName)
+        form.append('email', email)
+        form.append('password', password)
+
+        if(!email){
+            setErrorMessage('email tidak boleh kosong')
+            return
+        }
+        if(!password){
+            setErrorMessage('password tidak boleh kosong')
+            return
+        }
+        try{
+            const response = await axios.post('http://localhost:5050/auth/register', form.toString(),
+            {
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+              })
+            setSuccessMessage('register berhasil')
+            setErrorMessage('')
+            console.log(response.data)
+            setTimeout(() => {
+                // window.location = '/login'
+            }, 3000);
+        }catch(error){
+            if(error.response && error.response.status === 500 && error.response.data.code === '23505' && error.response.data.constraint === 'users_email_key'){
+                setErrorMessage('Email sudah digunakan.')
+            }else {
+                setErrorMessage('Terjadi kesalahan. Silakan coba lagi.')
+            }
+        }
+    }
+
+
     const [passwordVisible, setPasswordVisible] = React.useState(false)
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible)
@@ -18,32 +67,38 @@ const Register = () => {
             <header className="h-screen flex">
                 <div className="hidden md:block w-2/6 bg-[url(.././assets/images/bg-register.png)] bg-cover bg-no-repeat bg-center"></div>
                 <div className=" flex flex-1 justify-center items-center">
-                    <form className="w-4/5 flex flex-col gap-3" action="">
+                    <form onSubmit={processRegister} className="w-4/5 flex flex-col gap-3" action="">
+                    {errorMessage && (
+                            <div className="border-2 flex justify-center items-center border-red-500 bg-red-300 py-2">
+                                {errorMessage}
+                            </div>
+                        )}
+                        {successMessage && <div className="border-2 flex justify-center items-center border-green-500 py-2 bg-green-300">{successMessage}</div>}
                         <div className="flex items-center gap-5">
                             <div><FiCoffee size={30} color="#8E6447" /></div>
                             <div><h1 className="text-[#8E6447] font-bold text-2xl">Coffee Shop</h1></div>
                         </div>
                         <div className="text-[#8E6447] text-xl font-bold">Register</div>
                         <div className="text-[#4F5665]">Fill out the form correctly</div>
-                        <label className="flex flex-col gap-[5px]" htmlFor="name">
+                        <label className="flex flex-col gap-[5px]" htmlFor="fullName">
                             <div className="text-[#0B132A] font-bold">Full Name</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
                             <div className=""><FiUser/></div>
-                                <input className="w-full  text-[black]" id="name" name="name" type="text" placeholder="Enter Your Full Name" />
+                                <input ref={inputFullName} className="w-full  text-[black]" id="fullName" name="fullName" type="text" placeholder="Enter Your Full Name" />
                             </div>
                         </label>
                         <label className="flex flex-col gap-[5px]" htmlFor="email">
                             <div className="text-[#0B132A] font-bold">Email</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
                             <div ><FiMail/></div>
-                                <input className="w-full  text-[black]" id="email" name="email" type="email" placeholder="Enter Your Email" />
+                                <input ref={inputEmail} className="w-full  text-[black]" id="email" name="email" type="email" placeholder="Enter Your Email" />
                             </div>
                         </label>
                         <label className="flex flex-col gap-[5px]" htmlFor="password">
                             <div className="text-[#0B132A] font-bold">Password</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
                                 <div><FiLock /></div>
-                                <input className="w-full text-[black]" id="password" name="password" type={passwordVisible ? "text" : "password"} placeholder="Enter Your Password" />
+                                <input ref={inputPassword} className="w-full text-[black]" id="password" name="password" type={passwordVisible ? "text" : "password"} placeholder="Enter Your Password" />
                                 <div onClick={togglePasswordVisibility}>
                                     {passwordVisible ? <FiEye /> : <FiEyeOff />}
                                 </div>
@@ -53,13 +108,13 @@ const Register = () => {
                             <div className="text-[#0B132A] font-bold">Confirm Password</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
                                 <div><FiLock /></div>
-                                <input className="w-full text-[black]" id="confirmpassword" name="confirmpassword" type={confirmPasswordVisible ? "text" : "password"} placeholder="Enter Your Confirm Password" />
+                                <input ref={inputConfirmPassword} className="w-full text-[black]" id="confirmpassword" name="confirmpassword" type={confirmPasswordVisible ? "text" : "password"} placeholder="Enter Your Confirm Password" />
                                 <div onClick={toggleConfirmPasswordVisibility}>
                                     {confirmPasswordVisible ? <FiEye /> : <FiEyeOff />}
                                 </div>
                             </div>
                         </label>
-                        <div><Link className="hover:text-[#FF8906]" to="/login"><button className="py-4 bg-orange-500 w-full text-black font-bold">Register</button></Link></div>
+                        <div><button className="py-4 bg-orange-500 w-full text-black font-bold">Register</button></div>
                         <div className="flex justify-center">
                             <div className="text-[#4F5665]">Have An Account? <Link className="text-orange-500" to="/login">Login</Link></div>
                         </div>

@@ -11,6 +11,7 @@ export const Navbar = () => {
 
     return (
         <>
+                {/* overvlowhidden untuk menyembunyikan menu di humberger menu */}
               <nav
                 className={`${!menuOpen ? 'h-[80px]' : '' }  bg-black bg-[rgba(0,0,0,0,5)] text-white px-20 py-4 md:py-[30px] flex flex-col gap-10 md:gap-0 md:flex-row items-center md:h-20 w-full`}>
                 <div className="flex flex-col md:flex-row flex-1 w-full gap-2 md:gap-0">

@@ -27,7 +27,8 @@ const Home = () => {
     const [search, setSearch] = React.useState(false)
     return (
         <>
-            <nav
+        {/* overvlowhidden untuk menyembunyikan menu di humberger menu */}
+        <nav
                 className={`${!menuOpen ? 'h-[80px]' : ''}shadow bg-[rgba(11, 9, 9, 0.13)] fixed fill-[#FFFFFF] text-[#FFFFFF] px-20 py-4 md:py-[30px] flex flex-col gap-10 md:gap-0 md:flex-row items-center md:h-20 w-full`}>
                 <div className="flex flex-col md:flex-row flex-1 w-full gap-2 md:gap-0">
                     <div className="text-xl font-bold flex justify-between mt-3 md:mt-0">
@@ -189,7 +190,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Footer />
+        <Footer />
             <div>
                 <div className="fixed bottom-10 right-10 bg-[#FF8906] w-20 h-20 rounded-full flex justify-center items-center"><button onClick={() => setMenuChat(!menuChat)}><FiMessageCircle size={70} /></button></div>
             </div>
