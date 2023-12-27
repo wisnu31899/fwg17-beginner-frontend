@@ -6,8 +6,55 @@ import dp1 from "../assets/images/dphead1.png"
 import dp2 from "../assets/images/dphead2.png"
 import dp3 from "../assets/images/dphead3.png"
 import dp4 from "../assets/images/dphead4.png"
+import React from "react"
+import { CardProductDetail } from "../components/CardProduct"
+import box1 from "../assets/images/sec2-box1.png"
+import box2 from "../assets/images/sec2-box2.png"
 
 const DetailProduct = () => {
+
+    const [productUpload, setProductUpload] = React.useState([{}])
+    const [pageinfo, setPageInfo] = React.useState(null) 
+    const getProductUpload = async (page) => {
+        let response
+        if(page === 'next'){
+            response = await axios.get('http://localhost:5050/customer/products', {params: {
+                page: pageinfo.nextPage
+            }})
+            console.log(response.data.results)
+        }else{
+            response = await axios.get('http://localhost:5050/customer/products')
+        }
+        setPageInfo(response.data.pageinfo)
+        setProductUpload(response.data.results)
+    }
+    useEffect(()=>{
+        getProductUpload()
+    },[])
+
+
+    // const [data, setData] = React.useState([
+    //     {
+    //         promo: 'FLASH SALE!',
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         rating: '5.0',
+    //         discount: 20000,
+    //         price: 10000,
+    //         image: box1,
+    //         cardButton: true      
+    //     },
+    //     {
+    //         promo: 'FLASH SALE!',
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         rating: '5.0',
+    //         discount: 20000,
+    //         price: 10000,
+    //         image: box2,         
+    //     }
+    // ])
+
     return (
         <>
             <Navbar />
@@ -74,7 +121,7 @@ const DetailProduct = () => {
                                 className="w-full h-[40px] border-2 font-bold hover:border-[#FF8906] hover:bg-[#FF8906] rounded-[6px]"
                                 type="submit">Buy</button></Link></div>
                             <div className="flex-1"><Link to="/checkoutproduct"><button
-                                className="flex justify-center items-center gap-[10px] w-full h-[40px] border-2 hover:border-[#FF8906] font-bold text-[#FF8906] rounded-[6px]" type="submit"><FiShoppingCart size={20}/>add to cart</button></Link></div>
+                                className="flex justify-center items-center gap-[10px] w-full h-[40px] border-2 hover:border-[#FF8906] font-bold text-[#FF8906] rounded-[6px]" type="submit"><FiShoppingCart size={20} />add to cart</button></Link></div>
                         </div>
                     </div>
                 </div>
@@ -84,153 +131,28 @@ const DetailProduct = () => {
                     <div className="text-[#0B0909] text-[48px] font-bold">Rekommendation <span className="text-[#8E6447]">For You</span>
                     </div>
                     <div className="flex flex-col md:flex-row gap-[20px]">
-                        <div className="flex gap-[20px]">
-                            <div className="flex-1 relative">
-                                <div
-                                    className="absolute m-[15px] flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[135px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="h-[300px] bg-[url(../assets/images/dpsec1.png)] bg-cover bg-no-repeat bg-center"></div>
-                                <div className="flex flex-col gap-3 mx-[20px] bg-white -my-10 p-[10px]">
-                                    <div className="text-[22px] te-[black] font-bold">Hazelnut Latte</div>
-                                    <div className="text-[#4F5665]">You can explore the menu that we provide with fun and have their
-                                        own taste and make your day better.</div>
-                                    <div className="flex gap-[10px] items-center">
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div>5.0</div>
-                                    </div>
-                                    <div className="flex items-center gap-[10px]">
-                                        <div className="line-through text-[12px] text-[#D00000]">IDR 20.000</div>
-                                        <div className="text-[22px] text-[#FF8906]">IDR 10.000</div>
-                                    </div>
-                                    <div className="flex items-center justify-between gap-[10px]">
-                                        <div className="flex-1"><button
-                                            className="rounded-md font-bold border-none bg-[#FF8906] text-[black] h-[35px] w-full"
-                                            type="submit">Buy</button></div>
-                                        <div className="w-[60px]"><button
-                                            className="rounded-md flex border-[#FF8906] text-[#FF8906] justify-center items-center border-2 h-[35px] w-full"
-                                            type="submit"><FiShoppingCart size={20} /></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex-1 relative">
-                                <div
-                                    className="absolute m-[15px] flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[135px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="h-[300px] bg-[url(../assets/images/dpsec2.png)] bg-cover bg-no-repeat bg-center"></div>
-                                <div className="flex flex-col gap-3 mx-[20px] bg-white -my-10 p-[10px]">
-                                    <div className="text-[22px] te-[black] font-bold">Hazelnut Latte</div>
-                                    <div className="text-[#4F5665]">You can explore the menu that we provide with fun and have their
-                                        own taste and make your day better.</div>
-                                    <div className="flex gap-[10px] items-center">
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div>5.0</div>
-                                    </div>
-                                    <div className="flex items-center gap-[10px]">
-                                        <div className="line-through text-[12px] text-[#D00000]">IDR 20.000</div>
-                                        <div className="text-[22px] text-[#FF8906]">IDR 10.000</div>
-                                    </div>
-                                    <div className="flex items-center justify-between gap-[10px]">
-                                        <div className="flex-1"><button
-                                            className="rounded-md font-bold border-none bg-[#FF8906] text-[black] h-[35px] w-full"
-                                            type="submit">Buy</button></div>
-                                        <div className="w-[60px]"><button
-                                            className="rounded-md flex border-[#FF8906] text-[#FF8906] justify-center items-center border-2 h-[35px] w-full"
-                                            type="submit"><FiShoppingCart size={20} /></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex-1 relative">
-                                <div
-                                    className="absolute m-[15px] flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[135px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="h-[300px] bg-[url(../assets/images/dpsec1.png)] bg-cover bg-no-repeat bg-center"></div>
-                                <div className="flex flex-col gap-3 mx-[20px] bg-white -my-10 p-[10px]">
-                                    <div className="text-[22px] te-[black] font-bold">Hazelnut Latte</div>
-                                    <div className="text-[#4F5665]">You can explore the menu that we provide with fun and have their
-                                        own taste and make your day better.</div>
-                                    <div className="flex gap-[10px] items-center">
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div>5.0</div>
-                                    </div>
-                                    <div className="flex items-center gap-[10px]">
-                                        <div className="line-through text-[12px] text-[#D00000]">IDR 20.000</div>
-                                        <div className="text-[22px] text-[#FF8906]">IDR 10.000</div>
-                                    </div>
-                                    <div className="flex items-center justify-between gap-[10px]">
-                                        <div className="flex-1"><button
-                                            className="rounded-md font-bold border-none bg-[#FF8906] text-[black] h-[35px] w-full"
-                                            type="submit">Buy</button></div>
-                                        <div className="w-[60px]"><button
-                                            className="rounded-md flex border-[#FF8906] text-[#FF8906] justify-center items-center border-2 h-[35px] w-full"
-                                            type="submit"><FiShoppingCart size={20} /></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex-1 relative">
-                                <div
-                                    className="absolute m-[15px] flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[135px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="h-[300px] bg-[url(../assets/images/dpsec2.png)] bg-cover bg-no-repeat bg-center"></div>
-                                <div className="flex flex-col gap-3 mx-[20px] bg-white -my-10 p-[10px]">
-                                    <div className="text-[22px] te-[black] font-bold">Hazelnut Latte</div>
-                                    <div className="text-[#4F5665]">You can explore the menu that we provide with fun and have their
-                                        own taste and make your day better.</div>
-                                    <div className="flex gap-[10px] items-center">
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" />
-                                        </div>
-                                        <div>5.0</div>
-                                    </div>
-                                    <div className="flex items-center gap-[10px]">
-                                        <div className="line-through text-[12px] text-[#D00000]">IDR 20.000</div>
-                                        <div className="text-[22px] text-[#FF8906]">IDR 10.000</div>
-                                    </div>
-                                    <div className="flex items-center justify-between gap-[10px]">
-                                        <div className="flex-1"><button
-                                            className="rounded-md font-bold border-none bg-[#FF8906] text-[black] h-[35px] w-full"
-                                            type="submit">Buy</button></div>
-                                        <div className="w-[60px]"><button
-                                            className="rounded-md flex border-[#FF8906] text-[#FF8906] justify-center items-center border-2 h-[35px] w-full"
-                                            type="submit"><FiShoppingCart size={20} /></button></div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="flex gap-[20px]">
+                        {productUpload && productUpload.map((item, index) =>(
+                            <CardProductDetail
+                            key={String(index)}
+                            cardButton={item.cardButton}
+                            name={item.name}
+                            description={item.description}
+                            price={item.price}
+                            image={item.image}
+                            promo={item.promo}
+                            rating={item.rating}
+                            discount={item.discount}
+                            />
+                        ))}
                         </div>
                     </div>
                     <div className="pt-[50px] flex justify-center gap-[10px] items-center">
-                        <div className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">1</div>
-                        <div className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">2</div>
-                        <div className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">3</div>
-                        <div className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">4</div>
-                        <div><button className="text-[#FF8906]" type="submit"><i
-                            className="text-[white] fill-[#FF8906] w-[40px] h-[40px]"
-                            data-feather="arrow-right-circle"></i></button></div>
+                        <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">1</button></div>
+                        <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">2</button></div>
+                        <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">3</button></div>
+                        <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">4</button></div>
+                        <div><button className="text-[#FF8906]" onClick={() => getProducts('next')}><FiArrowRightCircle className="text-[white] fill-[#FF8906] w-[40px] h-[40px]" /></button></div>
                     </div>
                 </div>
             </section>

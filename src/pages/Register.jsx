@@ -30,24 +30,15 @@ const Register = () => {
             return
         }
         try{
-            const response = await axios.post('http://localhost:5050/auth/register', form.toString(),
-            {
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                },
-              })
+            const {data} = await axios.post('http://localhost:5050/auth/register', form.toString())
             setSuccessMessage('register berhasil')
             setErrorMessage('')
-            console.log(response.data)
+            console.log(data)
             setTimeout(() => {
                 // window.location = '/login'
             }, 3000);
-        }catch(error){
-            if(error.response && error.response.status === 500 && error.response.data.code === '23505' && error.response.data.constraint === 'users_email_key'){
-                setErrorMessage('Email sudah digunakan.')
-            }else {
-                setErrorMessage('Terjadi kesalahan. Silakan coba lagi.')
-            }
+        }catch (err) {
+            console.log(err)
         }
     }
 

@@ -3,7 +3,7 @@
 // karena <a> tidak bisa dugunakan maka diganti dengan tag <Link> akan tetapi harus diimport terlebih dahulu
 import { Link } from "react-router-dom"
 // import TransparantNavbar from "../components/TransparantNavbar"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Footer from "../components/Footer"
 import { FiCoffee, FiSearch, FiShoppingCart, FiCheck, FiStar, FiSend, FiArrowLeftCircle, FiArrowRightCircle, FiCircle, FiMessageCircle, FiMenu } from "react-icons/fi"
 import CardProduct from "../components/CardProduct"
@@ -21,6 +21,47 @@ import ellipse3 from"../assets/images/Ellipse 185.svg"
 
 
 const Home = () => {
+
+    const [productUpload, setProductUpload] = useState([{
+
+    }])
+    const getProductUpload = async () => {
+        const { data } = await axios.get('http://localhost:5050/customer/products')
+        console.log(data.results)
+        setProductUpload(data.results)
+    }
+    useEffect(()=>{
+        getProductUpload()
+    },[])
+
+    // const [data, setData] = React.useState([
+    //     {
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         price: 20000,
+    //         image: box1,
+    //         cardButton: true      
+    //     },
+    //     {
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         price: 20000,
+    //         image: box2,           
+    //     },
+    //     {
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         price: 20000,
+    //         image: box3,           
+    //     },
+    //     {
+    //         name: 'Hazelnut Latte',
+    //         description:'You can explore the menu that we provide with fun and have their own taste and make your day better.',
+    //         price: 20000,
+    //         image: box4,
+    //         cardButton: true           
+    //     },
+    // ])
     
     const [menuOpen, setMenuOpen] = React.useState(false)
     const [menuChat, setMenuChat] = React.useState(false)
@@ -129,18 +170,18 @@ const Home = () => {
                     <div className="h-[7px] w-[68px] text-[white] bg-[#FF8906]">a</div>
                     <div>Let's choose and have a bit taste of poeple's favorite. It might be yours too!</div>
                     <div className="flex flex-col md:flex-row gap-[10px]">
-                    <CardProduct cardButton={true} image={box1} price={20000} name="Hazelnut Latte" description="You can explore the menu that we provide with fun and have their own taste and make
-                                            your
-                                            day better." />
-                    <CardProduct image={box2} price={20000} name="Hazelnut Latte" description="You can explore the menu that we provide with fun and have their own taste and make
-                                            your
-                                            day better." />
-                    <CardProduct cardButton={true} image={box3} price={20000} name="Hazelnut Latte" description="You can explore the menu that we provide with fun and have their own taste and make
-                                            your
-                                            day better." />
-                    <CardProduct image={box4} price={20000} name="Hazelnut Latte" description="You can explore the menu that we provide with fun and have their own taste and make
-                                            your
-                                            day better." />
+                        {productUpload && productUpload.map((item) =>(
+                            <CardProduct
+                            key={String(item.id)}
+                            isPromo={true}
+                            cardButton={true}
+                            name={item.name}
+                            description={item.description}
+                            price={item.basePrice}
+                            image={item.image}
+                            to={`${item.id}`}
+                            />
+                        ))}
                     </div>
 
                 </div>
