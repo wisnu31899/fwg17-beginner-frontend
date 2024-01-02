@@ -131,17 +131,16 @@ const DetailProduct = () => {
                     </div>
                     <div className="flex flex-col md:flex-row gap-[20px]">
                     <div className="flex gap-[20px]">
-                        {productUpload && productUpload.map((item, index) =>(
+                    {productUpload && productUpload.map((item) => (
                             <CardProductDetail
-                            key={String(index)}
-                            cardButton={item.cardButton}
-                            name={item.productName}
-                            description={item.description}
-                            price={item.price}
-                            image={item.image}
-                            promo={item.promo}
-                            rating={item.rating}
-                            discount={item.discount}
+                                key={String(item.id)}
+                                isPromo={true}
+                                cardButton={true}
+                                name={item.productName}
+                                description={item.description}
+                                basePrice={item.basePrice}
+                                image={item.image}
+                                to={`${item.id}`}
                             />
                         ))}
                         </div>
