@@ -1,15 +1,26 @@
 import { Link } from "react-router-dom"
-import React from 'react';
+import React from "react"
 import { FiCoffee, FiMail, FiLock, FiEyeOff, FiEye, FiFacebook, FiGlobe } from "react-icons/fi"
 import axios from "axios"
+import {useNavigate} from 'react-router-dom'
+
 
 const Login = () => {
     const inputEmail = React.useRef() //dapetin elementnya
     const inputPassword = React.useRef()
-    const [token, setToken] = React.useState(null)
+    const [successMessage, setSuccessMessage] = React.useState(null)
     const [errorMessage, setErrorMessage] = React.useState(null)
+    const navigate = useNavigate()
+
+    const [token, setToken] = React.useState(window.localStorage.getItem('token'))
+    React.useEffect(() => {
+        if(token){
+            navigate('/')
+        }
+    }, [token, navigate])
 
     const processLogin = async (even) => {
+        try {
         even.preventDefault()
         const { value: email } = even.target.email
         const { value: password } = even.target.password
@@ -22,24 +33,20 @@ const Login = () => {
         const form = new URLSearchParams()
         form.append('email', email)
         form.append('password', password)
-        try {
             const { data } = await axios.post('http://localhost:5050/auth/login', form.toString())
+            setSuccessMessage(data.message)
             const { token: resultToken } = data.results
             setErrorMessage(null)
-            setToken(resultToken)
-            console.log(data.results)
+            // console.log(data.results)
             setTimeout(() => {
-                window.location = '/'
+                setToken(resultToken)
+                window.localStorage.setItem("token", resultToken)
+                navigate('/')
+                // window.location = '/'
             }, 3000);
 
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                // Unauthorized (wrong email or password)
-                setErrorMessage(error.response.data.message);
-            } else {
-                // Handle other errors if needed
-                setErrorMessage('An error occurred. Please try again.');
-            }
+            setErrorMessage(error.response.data.message)
         }
     }
 
@@ -59,7 +66,7 @@ const Login = () => {
                                 {errorMessage}
                             </div>
                         )}
-                        {token && <div className="border-2 flex justify-center items-center border-green-500 py-2 bg-green-300">login success</div>}
+                        {successMessage && <div className="border-2 flex justify-center items-center border-green-500 py-2 bg-green-300">{successMessage}</div>}
                         <div className="flex items-center gap-5">
                             <div><FiCoffee size={30} color="#8E6447" /></div>
                             <div><h1 className="text-[#8E6447] font-bold text-2xl">Coffee Shop</h1></div>

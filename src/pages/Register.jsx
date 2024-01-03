@@ -8,8 +8,8 @@ const Register = () => {
     const inputEmail = React.useRef()
     const inputPassword = React.useRef()
     const inputConfirmPassword = React.useRef()
-    const [successMessage, setSuccessMessage] = React.useState('')
-    const [errorMessage, setErrorMessage] = React.useState('')
+    const [successMessage, setSuccessMessage] = React.useState(null)
+    const [errorMessage, setErrorMessage] = React.useState(null)
 
     const processRegister = async (even) => {
         even.preventDefault()
@@ -32,13 +32,13 @@ const Register = () => {
         try{
             const {data} = await axios.post('http://localhost:5050/auth/register', form.toString())
             setSuccessMessage('register berhasil')
-            setErrorMessage('')
+            setErrorMessage(null)
             console.log(data)
             setTimeout(() => {
                 // window.location = '/login'
             }, 3000);
         }catch (err) {
-            console.log(err)
+            setErrorMessage(err.response.data.message)
         }
     }
 

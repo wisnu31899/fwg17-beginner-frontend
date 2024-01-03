@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import { FiShoppingCart, FiStar, FiThumbsUp, FiMinus, FiPlus, FiUser, FiMapPin, FiPhoneCall, FiCreditCard, FiTruck, FiRepeat } from "react-icons/fi"
+import { FiUser, FiMapPin, FiPhoneCall, FiCreditCard, FiTruck, FiRepeat } from "react-icons/fi"
 import cp1 from "../assets/images/cphead1.png"
 
 const DetailOrder = () => {

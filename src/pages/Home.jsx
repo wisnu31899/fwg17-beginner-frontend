@@ -4,18 +4,16 @@
 import { Link } from "react-router-dom"
 // import TransparantNavbar from "../components/TransparantNavbar"
 import React, { useEffect, useState } from "react"
+import axios from "axios"
+import TransparantNavbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import { FiCoffee, FiSearch, FiShoppingCart, FiCheck, FiStar, FiSend, FiArrowLeftCircle, FiArrowRightCircle, FiCircle, FiMessageCircle, FiMenu } from "react-icons/fi"
+import { FiCheck, FiStar, FiSend, FiArrowLeftCircle, FiArrowRightCircle, FiCircle, FiMessageCircle } from "react-icons/fi"
 import CardProduct from "../components/CardProduct"
-import box1 from "../assets/images/sec2-box1.png"
-import box2 from "../assets/images/sec2-box2.png"
-import box3 from "../assets/images/sec2-box3.png"
-import box4 from "../assets/images/sec2-box4.png"
 import homesec3 from "../assets/images/bg-homesec3.png"
 import homesec4 from "../assets/images/bg-homesec4.png"
-import ellipse1 from"../assets/images/Ellipse 183.svg"
-import ellipse2 from"../assets/images/Ellipse 184.svg"
-import ellipse3 from"../assets/images/Ellipse 185.svg"
+import ellipse1 from "../assets/images/Ellipse 183.svg"
+import ellipse2 from "../assets/images/Ellipse 184.svg"
+import ellipse3 from "../assets/images/Ellipse 185.svg"
 
 
 
@@ -26,13 +24,13 @@ const Home = () => {
 
     }])
     const getProductUpload = async () => {
-        const { data } = await axios.get('http://localhost:5050/customer/products')
+        const { data } = await axios.get('http://localhost:5050/products')
         console.log(data.results)
         setProductUpload(data.results)
     }
-    useEffect(()=>{
+    useEffect(() => {
         getProductUpload()
-    },[])
+    }, [])
 
     // const [data, setData] = React.useState([
     //     {
@@ -62,41 +60,11 @@ const Home = () => {
     //         cardButton: true           
     //     },
     // ])
-    
-    const [menuOpen, setMenuOpen] = React.useState(false)
     const [menuChat, setMenuChat] = React.useState(false)
-    const [search, setSearch] = React.useState(false)
     return (
         <>
-        {/* overvlowhidden untuk menyembunyikan menu di humberger menu */}
-        <nav
-                className={`${!menuOpen ? 'h-[80px]' : ''}shadow bg-[rgba(11, 9, 9, 0.13)] fixed fill-[#FFFFFF] text-[#FFFFFF] px-20 py-4 md:py-[30px] flex flex-col gap-10 md:gap-0 md:flex-row items-center md:h-20 w-full`}>
-                <div className="flex flex-col md:flex-row flex-1 w-full gap-2 md:gap-0">
-                    <div className="text-xl font-bold flex justify-between mt-3 md:mt-0">
-                        <div className="flex gap-[10px] md:gap-[20px]">
-                            <FiCoffee className="fill-[#FFFFFF]" />
-                            <h1>Coffee Shop</h1>
-                        </div>
-                        <ul className="flex gap-10 md:hidden">
-                            <li><FiShoppingCart /></li>
-                            <li><button onClick={() => setMenuOpen(!menuOpen)}><FiMenu /></button></li>
-                        </ul>
-                    </div>
-                    <ul className={`${!menuOpen ? 'hidden' : ''} md:flex flex-col md:flex-row gap-5 flex-1 justify-center items-center md:items-start w-full`}>
-                        <li className="w-full md:w-auto"><Link className="hover:border-b-2 pb-2 -mt-2 hover:border-orange-500" to="/">Home</Link></li>
-                        <li className="w-full md:w-auto"><Link className="hover:border-b-2 pb-2 -mt-2 hover:border-orange-500" to="/product">Product</Link></li>
-                    </ul>
-                </div>
-                <div className={`${!menuOpen ? 'hidden' : ''} flex-1 md:flex w-full`}>
-                    <ul className="flex flex-col md:flex-row md:justify-end gap-[20px] items-center w-full">
-                    <li className=" w-full md:w-auto hidden md:block">
-                            <button className="flex items-center relative" onClick={()=>setSearch(!search)}><input className={`${!search? 'hidden' : '' } text-black px-1 py-2`} type="text" placeholder="Search" /><FiSearch size={30} className="text-black -ml-[30px]"/></button>
-                        </li>
-                        <li className="w-full md:w-auto"><Link to="/login"><button className="px-5 py-2 bg-transparent border border-black text-black font-bold  rounded w-full">Sign In</button></Link></li>
-                        <li className="w-full md:w-auto"><Link to="/register"><button className="px-5 py-2 bg-orange-500 border text-black font-bold border-orange-500 rounded w-full">Sign Up</button></Link></li>
-                    </ul>
-                </div>
-            </nav>
+            {/* overvlowhidden untuk menyembunyikan menu di humberger menu */}
+            <TransparantNavbar />
             <header className="flex flex-col-reverse md:flex-row md:h-screen h-[1200px]">
                 <div className="flex-1 flex justify-center items-center bg-gradient-to-b from-gray-600 to-black">
                     <div className="flex flex-col max-w-[70%] text-white gap-5">
@@ -140,7 +108,7 @@ const Home = () => {
                         </div>
                         <div className="flex w-full gap-[10px] items-center mt-[150px] ">
                             <div className="flex-1"><form className="w-full" action=""><input className=" rounded-[8px] w-full h-[45px] px-[15px] border-2" type="text" placeholder="Masukan Pesan Anda" name="message" id="message" /></form></div>
-                            <div className=" bg-[#FF8906] rounded-[8px] flex justify-center items-center w-[45px] h-[45px]" ><FiSend size={30}/></div>
+                            <div className=" bg-[#FF8906] rounded-[8px] flex justify-center items-center w-[45px] h-[45px]" ><FiSend size={30} /></div>
                         </div>
                     </div>
                 </div>
@@ -170,16 +138,16 @@ const Home = () => {
                     <div className="h-[7px] w-[68px] text-[white] bg-[#FF8906]">a</div>
                     <div>Let's choose and have a bit taste of poeple's favorite. It might be yours too!</div>
                     <div className="flex flex-col md:flex-row gap-[10px]">
-                        {productUpload && productUpload.map((item) =>(
+                        {productUpload && productUpload.map((item) => (
                             <CardProduct
-                            key={String(item.id)}
-                            isPromo={true}
-                            cardButton={true}
-                            name={item.name}
-                            description={item.description}
-                            price={item.basePrice}
-                            image={item.image}
-                            to={`${item.id}`}
+                                key={String(item.id)}
+                                isPromo={true}
+                                cardButton={true}
+                                name={item.productName}
+                                description={item.description}
+                                basePrice={item.basePrice}
+                                image={item.image}
+                                to={`${item.id}`}
                             />
                         ))}
                     </div>
@@ -231,7 +199,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-        <Footer />
+            <Footer />
             <div>
                 <div className="fixed bottom-10 right-10 bg-[#FF8906] w-20 h-20 rounded-full flex justify-center items-center"><button onClick={() => setMenuChat(!menuChat)}><FiMessageCircle size={70} /></button></div>
             </div>

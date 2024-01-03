@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import { FiShoppingCart, FiStar, FiThumbsUp, FiMinus, FiPlus } from "react-icons/fi"
+import { FiShoppingCart, FiStar, FiArrowRightCircle, FiThumbsUp, FiMinus, FiPlus } from "react-icons/fi"
 import dp1 from "../assets/images/dphead1.png"
 import dp2 from "../assets/images/dphead2.png"
 import dp3 from "../assets/images/dphead3.png"
 import dp4 from "../assets/images/dphead4.png"
-import React from "react"
+import React,{useEffect} from "react"
+import axios from "axios"
 import { CardProductDetail } from "../components/CardProduct"
-import box1 from "../assets/images/sec2-box1.png"
-import box2 from "../assets/images/sec2-box2.png"
 
 const DetailProduct = () => {
 
@@ -18,12 +17,12 @@ const DetailProduct = () => {
     const getProductUpload = async (page) => {
         let response
         if(page === 'next'){
-            response = await axios.get('http://localhost:5050/customer/products', {params: {
+            response = await axios.get('http://localhost:5050/products', {params: {
                 page: pageinfo.nextPage
             }})
             console.log(response.data.results)
         }else{
-            response = await axios.get('http://localhost:5050/customer/products')
+            response = await axios.get('http://localhost:5050/products')
         }
         setPageInfo(response.data.pageinfo)
         setProductUpload(response.data.results)
@@ -132,17 +131,16 @@ const DetailProduct = () => {
                     </div>
                     <div className="flex flex-col md:flex-row gap-[20px]">
                     <div className="flex gap-[20px]">
-                        {productUpload && productUpload.map((item, index) =>(
+                    {productUpload && productUpload.map((item) => (
                             <CardProductDetail
-                            key={String(index)}
-                            cardButton={item.cardButton}
-                            name={item.name}
-                            description={item.description}
-                            price={item.price}
-                            image={item.image}
-                            promo={item.promo}
-                            rating={item.rating}
-                            discount={item.discount}
+                                key={String(item.id)}
+                                isPromo={true}
+                                cardButton={true}
+                                name={item.productName}
+                                description={item.description}
+                                basePrice={item.basePrice}
+                                image={item.image}
+                                to={`${item.id}`}
                             />
                         ))}
                         </div>
@@ -152,7 +150,7 @@ const DetailProduct = () => {
                         <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">2</button></div>
                         <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">3</button></div>
                         <div><button className="flex justify-center items-center border-none rounded-full bg-[#E8E8E8] text-[#A0A3BD] w-[33px] h-[33px]">4</button></div>
-                        <div><button className="text-[#FF8906]" onClick={() => getProducts('next')}><FiArrowRightCircle className="text-[white] fill-[#FF8906] w-[40px] h-[40px]" /></button></div>
+                        <div><button className="text-[#FF8906]" onClick={() => getProductUpload('next')}><FiArrowRightCircle className="text-[white] fill-[#FF8906] w-[40px] h-[40px]" /></button></div>
                     </div>
                 </div>
             </section>
