@@ -12,11 +12,12 @@ import ForgotPassword from "./pages/ForgotPassword"
 import Home from "./pages/Home"
 import Product from "./pages/Product"
 import HistoryOrder from "./pages/HistoryOrder"
-import DetailProduct from "./pages/DetailProduct"
 import DetailOrder from './pages/DetailOrder'
 import CheckoutProduct from "./pages/CheckoutProduct"
 import Profile from "./pages/Profile"
 import Message from "./pages/Message"
+import PrivateRoute from './components/PrivateRoute'
+import DetailProduct from './pages/DetailProduct'
 
 
 
@@ -44,11 +45,11 @@ const router = createBrowserRouter([
 },
 {
   path: '/historyorder',
-  element: <HistoryOrder />
+  element: (<PrivateRoute><HistoryOrder /></PrivateRoute>)
 },
 {
-  path: '/detailproduct',
-  element: <DetailProduct />
+path: '/product/:id',
+element: <DetailProduct/>
 },
 {
   path: '/detailorder',
@@ -56,11 +57,11 @@ const router = createBrowserRouter([
 },
 {
   path: '/checkoutproduct',
-  element: <CheckoutProduct />
+  element: (<PrivateRoute><CheckoutProduct /></PrivateRoute>)
 },
 {
   path: '/profile',
-  element: <Profile />
+  element: (<PrivateRoute><Profile /></PrivateRoute>)
 },
 {
   path: '/message',

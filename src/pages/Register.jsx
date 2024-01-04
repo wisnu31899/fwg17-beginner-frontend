@@ -35,7 +35,7 @@ const Register = () => {
             setErrorMessage(null)
             console.log(data)
             setTimeout(() => {
-                // window.location = '/login'
+                window.location = '/login'
             }, 3000);
         }catch (err) {
             setErrorMessage(err.response.data.message)
@@ -60,11 +60,11 @@ const Register = () => {
                 <div className=" flex flex-1 justify-center items-center">
                     <form onSubmit={processRegister} className="w-4/5 flex flex-col gap-3" action="">
                     {errorMessage && (
-                            <div className="border-2 flex justify-center items-center border-red-500 bg-red-300 py-2">
+                            <div className="border-2 flex justify-center items-center border-red-500 bg-red-300 py-1">
                                 {errorMessage}
                             </div>
                         )}
-                        {successMessage && <div className="border-2 flex justify-center items-center border-green-500 py-2 bg-green-300">{successMessage}</div>}
+                        {successMessage && <div className="border-2 flex justify-center items-center border-green-500 py-1 bg-green-300">{successMessage}</div>}
                         <div className="flex items-center gap-5">
                             <div><FiCoffee size={30} color="#8E6447" /></div>
                             <div><h1 className="text-[#8E6447] font-bold text-2xl">Coffee Shop</h1></div>
@@ -105,7 +105,7 @@ const Register = () => {
                                 </div>
                             </div>
                         </label>
-                        <div><button className="py-4 bg-orange-500 w-full text-black font-bold">Register</button></div>
+                        <div><button className="py-2 bg-orange-500 w-full text-black font-bold">Register</button></div>
                         <div className="flex justify-center">
                             <div className="text-[#4F5665]">Have An Account? <Link className="text-orange-500" to="/login">Login</Link></div>
                         </div>

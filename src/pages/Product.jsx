@@ -17,7 +17,8 @@ const Product = () => {
         if (page === 'next') {
             response = await axios.get('http://localhost:5050/products', {
                 params: {
-                    page: pageinfo.nextPage
+                    page: pageinfo.nextPage,
+                    limit: 6
                 }
             })
             console.log(response.data.results)
@@ -30,6 +31,8 @@ const Product = () => {
     useEffect(() => {
         getProductUpload()
     },[])
+
+    
 
 
     // const [data, setData] = React.useState([
@@ -200,7 +203,7 @@ const Product = () => {
                 </div>
             </section>
             <section className="flex justify-center md:pb-[100px]">
-                <div className=" flex gap-[20px] h-[1600px] md:h-[1950px] w-full md:w-[80%]">
+                <div className=" flex gap-[20px] h-[1600px] md:h-[1200px] w-full md:w-[80%]">
                     <div className="hidden md:flex flex-col w-full max-w-[300px]">
                         <div className="text-[#0B0909] text-[48px]">Our <span className="text-[#8E6447]">Product</span></div>
                         <form action=""
@@ -297,16 +300,17 @@ const Product = () => {
                     </div>
                     <div className="flex-1 flex flex-col gap-[50px] pt-[75px]">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
-                            {productUpload && productUpload.map((item) => (
+                            {productUpload && productUpload.map((item, index) => (
                                 <CardProductDetail
-                                    key={String(item.id)}
-                                    isPromo={true}
-                                    cardButton={true}
-                                    name={item.productName}
-                                    description={item.description}
-                                    basePrice={item.basePrice}
-                                    image={item.image}
-                                    to={`${item.id}`}
+                                key={String(index)}
+                                id={item.idProduct}
+                                isPromo={true}
+                                cardButton={true}
+                                name={item.productName}
+                                description={item.description}
+                                basePrice={item.basePrice}
+                                image={item.image}
+    
                                 />
                             ))}
                         </div>

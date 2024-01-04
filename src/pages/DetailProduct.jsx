@@ -8,17 +8,36 @@ import dp3 from "../assets/images/dphead3.png"
 import dp4 from "../assets/images/dphead4.png"
 import React,{useEffect} from "react"
 import axios from "axios"
+import { useParams } from "react-router-dom"
 import { CardProductDetail } from "../components/CardProduct"
+import { getProductUpload } from "./Home"
 
 const DetailProduct = () => {
+
+    const [product, setProduct] = React.useState([{}])
+    const [productRecommended, setProductRecommended] = React.useState({})
+    const {id} = useParams()
+    const getDetailProduct = async (id) =>{
+        const {data} = await axios.get(`http://localhost:5050/products/${id}`)
+        console.log(data)
+        if(data.success){
+            setProduct(data.results)
+        }
+    }
+    React.useEffect(() => {
+        getDetailProduct(id)
+        getProductUpload(setProductRecommended)
+    },[id])
 
     const [productUpload, setProductUpload] = React.useState([{}])
     const [pageinfo, setPageInfo] = React.useState(null) 
     const getProductUpload = async (page) => {
         let response
         if(page === 'next'){
-            response = await axios.get('http://localhost:5050/products', {params: {
-                page: pageinfo.nextPage
+            response = await axios.get('http://localhost:5050/products', {
+                params: {
+                page: pageinfo.nextPage,
+                limit: 4
             }})
             console.log(response.data.results)
         }else{
@@ -60,7 +79,7 @@ const DetailProduct = () => {
             <header className=" flex flex-col md:flex-row h-screen my-[50px]">
                 <div className="flex-1 flex justify-center md:justify-end items-center">
                     <div className="w-[80%] items-center flex-col flex gap-[20px]">
-                        <div><img width="450px" src={dp1} alt="" /></div>
+                        <div><img width="450px" src={product.image ? `http://localhost:5050/uploads/products/${product.image}` : ''} alt="" /></div>
                         <div className="flex gap-[20px]">
                             <div><img width="135px" src={dp2} alt="" /></div>
                             <div><img width="135px" src={dp3} alt="" /></div>
@@ -73,10 +92,10 @@ const DetailProduct = () => {
                         <div
                             className="flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[135px] h-[35px]">
                             FLASH SALE!</div>
-                        <div className="font-bold text-[#0B0909] text-[48px]">Hazelnut Latte</div>
+                        <div className="font-bold text-[#0B0909] text-[48px]">{product.name}</div>
                         <div className="flex items-center gap-[10px]">
-                            <div className="line-through text-[12px] text-[#D00000]">IDR 20.000</div>
-                            <div className="text-[22px] text-[#FF8906]">IDR 10.000</div>
+                            <div className="line-through text-[12px] text-[#D00000]">IDR {product.basePrice}</div>
+                            <div className="text-[22px] text-[#FF8906]">IDR {product.basePrice/2}</div>
                         </div>
                         <div className="flex gap-[10px] items-center">
                             <div><FiStar className="text-[#FF8906] fill-[#FF8906] h-[15px] w-[15px]" /></div>
@@ -91,9 +110,7 @@ const DetailProduct = () => {
                             <div>Recommendation</div>
                             <div><FiThumbsUp size={20} className="text-[#FF8906]" /></div>
                         </div>
-                        <div>Cold brewing is a method of brewing that combines ground coffee and cool water and uses time
-                            instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48
-                            hours.</div>
+                        <div>{product.description}</div>
                         <div className="flex w-[115px] h-[35px] border-2 rounded">
                             <div className="flex-1 flex items-center justify-center border-2 rounded border-[#FF8906]"><FiMinus /></div>
                             <div className="flex-1 flex items-center justify-center">1</div>
@@ -131,16 +148,17 @@ const DetailProduct = () => {
                     </div>
                     <div className="flex flex-col md:flex-row gap-[20px]">
                     <div className="flex gap-[20px]">
-                    {productUpload && productUpload.map((item) => (
+                    {productUpload && productUpload.map((item, index) => (
                             <CardProductDetail
-                                key={String(item.id)}
-                                isPromo={true}
-                                cardButton={true}
-                                name={item.productName}
-                                description={item.description}
-                                basePrice={item.basePrice}
-                                image={item.image}
-                                to={`${item.id}`}
+                            key={String(index)}
+                            id={item.idProduct}
+                            isPromo={true}
+                            cardButton={true}
+                            name={item.productName}
+                            description={item.description}
+                            basePrice={item.basePrice}
+                            image={item.image}
+                
                             />
                         ))}
                         </div>

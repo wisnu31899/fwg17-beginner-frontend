@@ -16,20 +16,25 @@ import ellipse2 from "../assets/images/Ellipse 184.svg"
 import ellipse3 from "../assets/images/Ellipse 185.svg"
 
 
-
+export const getProductUpload = async (cb, limit) => {
+    const { data } = await axios.get('http://localhost:5050/products', {
+        params: {
+            // bestSeller: true,
+            limit
+        }
+    })
+    console.log(data.results)
+    cb(data.results)
+}
 
 const Home = () => {
 
     const [productUpload, setProductUpload] = useState([{
 
     }])
-    const getProductUpload = async () => {
-        const { data } = await axios.get('http://localhost:5050/products')
-        console.log(data.results)
-        setProductUpload(data.results)
-    }
+  
     useEffect(() => {
-        getProductUpload()
+        getProductUpload(setProductUpload, 4)
     }, [])
 
     // const [data, setData] = React.useState([
@@ -138,16 +143,16 @@ const Home = () => {
                     <div className="h-[7px] w-[68px] text-[white] bg-[#FF8906]">a</div>
                     <div>Let's choose and have a bit taste of poeple's favorite. It might be yours too!</div>
                     <div className="flex flex-col md:flex-row gap-[10px]">
-                        {productUpload && productUpload.map((item) => (
+                        {productUpload && productUpload.map((item, index) => (
                             <CardProduct
-                                key={String(item.id)}
+                                key={String(index)}
+                                id={item.idProduct}
                                 isPromo={true}
                                 cardButton={true}
                                 name={item.productName}
                                 description={item.description}
                                 basePrice={item.basePrice}
                                 image={item.image}
-                                to={`${item.id}`}
                             />
                         ))}
                     </div>

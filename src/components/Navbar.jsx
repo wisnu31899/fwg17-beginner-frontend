@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { FiCoffee, FiLogOut, FiMenu, FiSearch, FiShoppingCart } from "react-icons/fi"
+import { FiCoffee, FiLogOut, FiMenu, FiSearch, FiShoppingCart, FiUser } from "react-icons/fi"
+import axios from "axios"
 
 
 export const TransparantNavbar = () =>{
@@ -42,6 +43,21 @@ export const TransparantNavbar = () =>{
 
 
 const Navbar = () => {
+
+    const [user, setUser] = React.useState({})
+        //get profile
+        const getProfile = async ()=>{
+            const {data} = await axios.get('http://localhost:5050/profile', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(data.results[0].picture)
+                setUser(data.results[0].picture)
+        }
+        React.useEffect(()=>{
+            getProfile()
+        },[])
 
     const navigate = useNavigate()
     const [token, setToken] = React.useState(window.localStorage.getItem('token'))
@@ -86,7 +102,8 @@ const Navbar = () => {
                             <div className="w-full flex flex-col md:flex-row gap-[10px] md:w-auto">
                                 {token && <>
                                     <Link to="/profile">
-                                        <div className="md:block hidden bg-white px-1 py-2 md:w-[40px] h-[40px] rounded-full md:w-full"></div>
+                                        {/* <div className="md:block hidden bg-white px-1 py-2 md:w-[40px] h-[40px] rounded-full md:w-full"><img src={`http://localhost:5050/profile/${user}`} alt=""/></div> */}
+                                        <div className="md:block hidden bg-orange-500 px-1 py-2 md:w-[40px] h-[40px] rounded-full md:w-full"><FiUser size={25} className="text-white"/></div>
                                         </Link>
                                         <button onClick={logOut} type="button" className="md:flex justify-center md:w-[40px] h-[40px] rounded-full hidden px-1 py-2 bg-orange-500 border border-orange-500 rounded w-full"><FiLogOut size={25} className="text-white"/></button> 
                                         </>}
