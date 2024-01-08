@@ -6,6 +6,12 @@
 // import './App.css'
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
+//redux
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
+
+//page
 import Login from "./pages/login"
 import Register from "./pages/Register"
 import ForgotPassword from "./pages/ForgotPassword"
@@ -18,7 +24,6 @@ import Profile from "./pages/Profile"
 import Message from "./pages/Message"
 import PrivateRoute from './components/PrivateRoute'
 import DetailProduct from './pages/DetailProduct'
-
 
 
 const router = createBrowserRouter([
@@ -71,7 +76,13 @@ element: <DetailProduct/>
 
 const App = ()=>{
   return(
-    <RouterProvider router={router} />
+    // menggunakan redux
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+      </Provider>
+
+    // tanpa redux
+    // <RouterProvider router={router} />
   )
 }
 

@@ -4,20 +4,28 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiUser, FiMail, FiPhoneCall, FiLock, FiMapPin, FiEye, FiEyeOff } from "react-icons/fi"
 import axios from "axios"
+import { useSelector } from "react-redux"
 
 const Profile = () => {
     const [successMessage, setSuccessMessage] = React.useState(null)
     const [preview, setPreview] = React.useState()
     const [user, setUser] = React.useState({})
-    const token = window.localStorage.getItem('token')
+    
+    
+    
+    // const token = window.localStorage.getItem('token')
+    const token = useSelector(state => state.auth.token)
+    
     //get profile
     const getProfile = async ()=>{
+       if(token){
         const {data} = await axios.get('http://localhost:5050/profile', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             setUser(data.results[0])
+       }
     }
     React.useEffect(()=>{
         getProfile()
@@ -106,10 +114,10 @@ const uploadPicture = async (e) =>{
                             className="gap-[10px] flex flex-col justify-center items-center max-w-[280px] w-full border-2 p-[10px]">
                             <div className="text-[#0B132A] text-[22px]">{user.fullName}</div>
                             <div>{user.email}</div>
-                            <label className="pl-[125px]" htmlFor="">
+                            <label className="pl-[125px]">
                                 {(!preview && user.picture) && <img className="rounded-full" src={`http://localhost:5050/uploads/profile/${user.picture}`} alt="" />}
                                 {preview && <img className="rounded-full" src={preview} alt=""/>}
-                                <input multiple={false} onChange={updatePicture} className="" type="file" name="picture" />
+                                <input multiple={false} onChange={updatePicture} className="hidden" type="file" name="picture" />
                             </label>
                             <button className="bg-[#FF8906] py-[12px] px-[18px] text-[#0B0909]">Upload New Photo</button>
                             <div>Since 20 January 2022</div>

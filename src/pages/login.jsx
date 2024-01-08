@@ -4,6 +4,9 @@ import { FiCoffee, FiMail, FiLock, FiEyeOff, FiEye, FiFacebook, FiGlobe } from "
 import axios from "axios"
 import {useNavigate} from 'react-router-dom'
 
+//import redux
+import { useDispatch, useSelector } from "react-redux"
+import { login as actionLogin } from "../redux/reducers/auth"
 
 const Login = () => {
     const inputEmail = React.useRef() //dapetin elementnya
@@ -12,7 +15,9 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = React.useState(null)
     const navigate = useNavigate()
 
-    const [token, setToken] = React.useState(window.localStorage.getItem('token'))
+    const token = useSelector(state => state.auth.token) //default null dari file auth di reducer
+    const dispatch = useDispatch()
+    // const [token, setToken] = React.useState(window.localStorage.getItem('token'))
     React.useEffect(() => {
         if(token){
             navigate('/')
@@ -39,8 +44,9 @@ const Login = () => {
             setErrorMessage(null)
             // console.log(data.results)
             setTimeout(() => {
-                setToken(resultToken)
-                window.localStorage.setItem("token", resultToken)
+                // setToken(resultToken)
+                // window.localStorage.setItem("token", resultToken)
+                dispatch(actionLogin(resultToken))
                 navigate('/')
                 // window.location = '/'
             }, 3000);

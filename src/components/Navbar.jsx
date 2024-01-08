@@ -2,6 +2,8 @@ import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FiCoffee, FiLogOut, FiMenu, FiSearch, FiShoppingCart, FiUser } from "react-icons/fi"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { logout as actionLogout } from "../redux/reducers/auth"
 
 
 export const TransparantNavbar = () =>{
@@ -47,23 +49,30 @@ const Navbar = () => {
     const [user, setUser] = React.useState({})
         //get profile
         const getProfile = async ()=>{
-            const {data} = await axios.get('http://localhost:5050/profile', {
+            if(token){
+                const {data} = await axios.get('http://localhost:5050/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
             console.log(data.results[0].picture)
                 setUser(data.results[0].picture)
+            }
         }
         React.useEffect(()=>{
             getProfile()
         },[])
 
+
+    //menggunakan redux
+    const dispatch = useDispatch()
+    //penggunaan token tanpa redux
     const navigate = useNavigate()
-    const [token, setToken] = React.useState(window.localStorage.getItem('token'))
+    // const [token, setToken] = React.useState(window.localStorage.getItem('token'))
     const logOut = () =>{
-        setToken(null)
-        window.localStorage.removeItem('token')
+        // setToken(null)
+        // window.localStorage.removeItem('token')
+        dispatch(actionLogout())
         navigate('/login')
     }
 
