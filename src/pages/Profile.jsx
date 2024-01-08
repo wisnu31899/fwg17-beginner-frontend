@@ -3,14 +3,19 @@ import React from "react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiUser, FiMail, FiPhoneCall, FiLock, FiMapPin, FiEye, FiEyeOff } from "react-icons/fi"
+
 import axios from "axios"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+// import { setProfile as setProfileAction } from "../redux/reducers/profile" 
 
 const Profile = () => {
     const [successMessage, setSuccessMessage] = React.useState(null)
     const [preview, setPreview] = React.useState()
+
     const [user, setUser] = React.useState({})
-    
+    // pengganti user,setUser
+    // const user = userSelector(state => state.profile.data)
+    // const dispatch = useDispatch()
     
     
     // const token = window.localStorage.getItem('token')
@@ -25,6 +30,7 @@ const Profile = () => {
             }
         })
             setUser(data.results[0])
+             // dispatch(setProfileAction(data.results[0]))//pengganti setUser
        }
     }
     React.useEffect(()=>{
@@ -70,6 +76,8 @@ const Profile = () => {
         })
         setSuccessMessage(data.message)
         setUser(data.results)
+        // dispatch(setProfileAction(data.results[0]))//pengganti setUser
+        
     }
     //updatefoto
     const updatePicture = (e) =>{
@@ -92,6 +100,7 @@ const uploadPicture = async (e) =>{
             window.alert(data.message)
    
             setUser(data.results[0])
+            // dispatch(setProfileAction(data.results[0]))//pengganti setUser
             setPreview(null)
         }
     }catch(err){

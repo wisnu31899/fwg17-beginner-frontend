@@ -2,8 +2,11 @@ import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FiCoffee, FiLogOut, FiMenu, FiSearch, FiShoppingCart, FiUser } from "react-icons/fi"
 import axios from "axios"
-import { useDispatch } from "react-redux"
+
+// reudx
+import { useDispatch, useSelector } from "react-redux"
 import { logout as actionLogout } from "../redux/reducers/auth"
+// import { setProfile as setProfileAction } from "../redux/reducers/profile" 
 
 
 export const TransparantNavbar = () =>{
@@ -47,6 +50,8 @@ export const TransparantNavbar = () =>{
 const Navbar = () => {
 
     const [user, setUser] = React.useState({})
+    // pengganti user,setUser
+    // const user = userSelector(state => state.profile.data)
         //get profile
         const getProfile = async ()=>{
             if(token){
@@ -57,6 +62,7 @@ const Navbar = () => {
             })
             console.log(data.results[0].picture)
                 setUser(data.results[0].picture)
+                // dispatch(setProfileAction(data.results[0]))//pengganti setUser
             }
         }
         React.useEffect(()=>{

@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 //redux
 import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import { persistor, store } from './redux/store'
 
 //page
 import Login from "./pages/login"
@@ -24,6 +24,7 @@ import Profile from "./pages/Profile"
 import Message from "./pages/Message"
 import PrivateRoute from './components/PrivateRoute'
 import DetailProduct from './pages/DetailProduct'
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 const router = createBrowserRouter([
@@ -78,7 +79,9 @@ const App = ()=>{
   return(
     // menggunakan redux
     <Provider store={store}>
+      <PersistGate persistor={persistor}>
       <RouterProvider router={router}/>
+      </PersistGate>
       </Provider>
 
     // tanpa redux

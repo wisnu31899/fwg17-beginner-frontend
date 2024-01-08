@@ -1,16 +1,30 @@
 import React from "react"
-import { Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { Navigate, useNavigate } from "react-router-dom"
 
 const PrivateRoute = ({children}) =>{
-    const [token, setToken] = React.useState(window.localStorage.getItem('token'))
-    if(token){
-        return (
-            <>{children}</>
-        )
-    }else{
-        return(
-            <Navigate to={'/login'} />
-        )
-    }
+    // const [token, setToken] = React.useState(window.localStorage.getItem('token'))
+    const token = useSelector(state => state.auth.token)
+    const navigate = useNavigate()
+    
+    React.useEffect(()=>{
+        if(!token){
+            navigate('/login')
+        }
+    }, [token,navigate])
+
+    return (
+        <>{children}</>
+    )
+
+    // if(token){
+    //     return (
+    //         <>{children}</>
+    //     )
+    // }else{
+    //     return(
+    //         <Navigate to={'/login'} />
+    //     )
+    // }
 }
 export default PrivateRoute
