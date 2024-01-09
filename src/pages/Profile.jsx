@@ -6,16 +6,16 @@ import { FiUser, FiMail, FiPhoneCall, FiLock, FiMapPin, FiEye, FiEyeOff } from "
 
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-// import { setProfile as setProfileAction } from "../redux/reducers/profile" 
+import { setProfile as setProfileAction } from "../redux/reducers/profile" 
 
 const Profile = () => {
     const [successMessage, setSuccessMessage] = React.useState(null)
     const [preview, setPreview] = React.useState()
 
-    const [user, setUser] = React.useState({})
+    // const [user, setUser] = React.useState({})
     // pengganti user,setUser
-    // const user = userSelector(state => state.profile.data)
-    // const dispatch = useDispatch()
+    const user = userSelector(state => state.profile.data)
+    const dispatch = useDispatch()
     
     
     // const token = window.localStorage.getItem('token')
@@ -29,8 +29,8 @@ const Profile = () => {
                 'Authorization': `Bearer ${token}`
             }
         })
-            setUser(data.results[0])
-             // dispatch(setProfileAction(data.results[0]))//pengganti setUser
+            // setUser(data.results[0])
+             dispatch(setProfileAction(data.results[0]))//pengganti setUser
        }
     }
     React.useEffect(()=>{
@@ -99,8 +99,8 @@ const uploadPicture = async (e) =>{
             })
             window.alert(data.message)
    
-            setUser(data.results[0])
-            // dispatch(setProfileAction(data.results[0]))//pengganti setUser
+            // setUser(data.results[0])
+            dispatch(setProfileAction(data.results[0]))//pengganti setUser
             setPreview(null)
         }
     }catch(err){

@@ -4,12 +4,12 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
-import React from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 //redux
 import { Provider } from 'react-redux'
 import { persistor, store } from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 //page
 import Login from "./pages/login"
@@ -24,7 +24,7 @@ import Profile from "./pages/Profile"
 import Message from "./pages/Message"
 import PrivateRoute from './components/PrivateRoute'
 import DetailProduct from './pages/DetailProduct'
-import { PersistGate } from 'redux-persist/integration/react'
+
 
 
 const router = createBrowserRouter([

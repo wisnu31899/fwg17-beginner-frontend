@@ -62,7 +62,7 @@ const Product = () => {
 
     return (
         <>
-            <div className={`${!menuFilter ? 'hidden' : 'fixed'} md:hidden z-10 flex-col w-full max-w-[190px]`}>
+            {/* <div className={`${!menuFilter ? 'hidden' : 'fixed'} md:hidden z-10 flex-col w-full max-w-[190px]`}>
                 <div className="text-orange-500 text-[18px]">Our <span className="text-orange-200">Product</span></div>
                 <form action=""
                     className="gap-[5px] max-w-[385px] p-[5px] rounded-[16px] text-[white] bg-[black] flex flex-col">
@@ -155,7 +155,7 @@ const Product = () => {
                     </label>
                     <button className="rounded-[8px] bg-[#FF8906] py-[10px]" type="submit">Apply Filter</button>
                 </form>
-            </div>
+            </div> */}
             <Navbar />
             <header className="h-[305px] flex items-center justify-center bg-[url(.././assets/images/ph1.png)] bg-cover bg-no-repeat bg-center">
                 <div className="max-w-[900px] text-[#FFF] text-[48px] font-bold">We Provide Good Coffee and Healthy Meals</div>

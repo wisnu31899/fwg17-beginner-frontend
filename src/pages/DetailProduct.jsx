@@ -142,7 +142,7 @@ const DetailProduct = () => {
                     </div>
                 </div>
             </header>
-            <section className=" flex md:pt-[0px] pt-[450px] h-[1350px] md:h-[800px] justify-center">
+            <section className=" flex md:pt-[0px] pt-[450px] h-[1350px] md:h-[900px] justify-center">
                 <div className="w-[90%] flex flex-col gap-[25px]">
                     <div className="text-[#0B0909] text-[48px] font-bold">Rekommendation <span className="text-[#8E6447]">For You</span>
                     </div>

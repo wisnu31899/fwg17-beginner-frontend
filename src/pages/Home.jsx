@@ -5,10 +5,10 @@ import { Link } from "react-router-dom"
 // import TransparantNavbar from "../components/TransparantNavbar"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import {TransparantNavbar} from "../components/Navbar"
+import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiCheck, FiStar, FiSend, FiArrowLeftCircle, FiArrowRightCircle, FiCircle, FiMessageCircle } from "react-icons/fi"
-import CardProduct from "../components/CardProduct"
+import CardProduct, { CardProductDetail } from "../components/CardProduct"
 import homesec3 from "../assets/images/bg-homesec3.png"
 import homesec4 from "../assets/images/bg-homesec4.png"
 import ellipse1 from "../assets/images/Ellipse 183.svg"
@@ -69,7 +69,7 @@ const Home = () => {
     return (
         <>
             {/* overvlowhidden untuk menyembunyikan menu di humberger menu */}
-            <TransparantNavbar />
+            <Navbar />
             <header className="flex flex-col-reverse md:flex-row md:h-screen h-[1200px]">
                 <div className="flex-1 flex justify-center items-center bg-gradient-to-b from-gray-600 to-black">
                     <div className="flex flex-col max-w-[70%] text-white gap-5">
@@ -136,19 +136,20 @@ const Home = () => {
                 </div>
                 <div className="flex-1 bg-[url(../assets/images/bg-homesec1.png)] bg-cover bg-no-repeat bg-center"></div>
             </section>
-            <section className="h-[2500px] md:h-screen flex justify-center text-[#4F5665] md:my-[50px]">
+            <section className="h-[2500px] md:h-screen flex justify-center text-[#4F5665] md:my-[100px]">
                 <div className="max-w-[90%] flex flex-col justify-center items-center gap-[25px]">
                     <div className="text-[#0B132A] text-[48px] font-bold">Here is People's <span
                         className="text-[#8E6447]">Favorite</span></div>
                     <div className="h-[7px] w-[68px] text-[white] bg-[#FF8906]">a</div>
                     <div>Let's choose and have a bit taste of poeple's favorite. It might be yours too!</div>
                     <div className="flex flex-col md:flex-row gap-[10px]">
-                        {productUpload && productUpload.map((item, index) => (
+                        {CardProductDetail && CardProductDetail.map((item, index) => (
                             <CardProduct
                                 key={String(index)}
                                 id={item.idProduct}
-                                isPromo={true}
-                                cardButton={true}
+                                isPromo={false}
+                                cardButton={false}
+                                isRating={true}
                                 name={item.productName}
                                 description={item.description}
                                 basePrice={item.basePrice}
