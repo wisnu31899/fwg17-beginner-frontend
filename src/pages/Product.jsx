@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import FilterProduct, { FilterProductMobile } from "../components/FilterProduct"
-import { FiCircle, FiArrowRightCircle, FiMenu, FiArrowLeftCircle } from "react-icons/fi"
+// import FilterProduct, { FilterProductMobile } from "../components/FilterProduct"
+import { FiCheck,FiCircle, FiArrowRightCircle, FiMenu, FiArrowLeftCircle } from "react-icons/fi"
 import img1sec1 from "../assets/images/ps1-1.png"
 import img1sec2 from "../assets/images/ps1-2.png"
 import React, { useState, useEffect } from "react"
@@ -93,10 +93,10 @@ const Product = () => {
 
     return (
         <>
-            <div className={`${!menuFilter ? 'hidden' : 'fixed'} md:hidden z-10 flex-col w-full max-w-[190px]`}>
+            {/* <div className={`${!menuFilter ? 'hidden' : 'fixed'} md:hidden z-10 flex-col w-full max-w-[190px]`}>
                 <div className="text-orange-500 text-[18px]">Our <span className="text-orange-200">Product</span></div>
                 <FilterProductMobile />
-            </div>
+            </div> */}
             <Navbar />
             <header className="h-[305px] flex items-center justify-center bg-[url(.././assets/images/ph1.png)] bg-cover bg-no-repeat bg-center">
                 <div className="max-w-[900px] text-[#FFF] text-[48px] font-bold">We Provide Good Coffee and Healthy Meals</div>
@@ -147,7 +147,102 @@ const Product = () => {
                 <div className=" flex gap-[20px] h-[1600px] md:h-[1900px] w-full md:w-[80%]">
                     <div className="hidden md:flex flex-col w-full max-w-[300px]">
                         <div className="text-[#0B0909] text-[48px]">Our <span className="text-[#8E6447]">Product</span></div>
-                        <FilterProduct />
+                        <form action=""
+            className="gap-[15px] max-w-[385px] p-[30px] rounded-[16px] text-[white] bg-[black] flex flex-col">
+            <div className="flex justify-between">
+                <div>Filter</div>
+                <button type="reset" className="hover:text-orange-400">Reset Filter</button>
+            </div>
+            <label className="flex flex-col gap-[5px]" htmlFor="search">
+                <div>Search</div>
+                <input className="p-[15px] text-[black]" type="text" value={search} onChange={(e) => setSearch(e.target.value)} id="search" name="search"
+                    placeholder="Search Your Product" />
+            </label>
+            <div>Category</div>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="favorite">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="favorite" name="favorite" />
+                <div>Favorite Product</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="coffee">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="coffee" name="coffee" />
+                <div>Coffee</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="non">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="non" name="non" />
+                <div>Non Coffee</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="food">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="food" name="food" />
+                <div>Foods</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="add">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="add" name="add" />
+                <div>Add-On</div>
+            </label>
+            <div>Sort By</div>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="Buy1get1">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="Buy1get1" name="Buy1get1" />
+                <div>Buy1get1</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="flash">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="flash" name="flash" />
+                <div>Flash Sale</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="birthday">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="birthday" name="birthday" />
+                <div>Birthday Package</div>
+            </label>
+            <label className=" relative flex items-center gap-[40px]" htmlFor="cheap">
+                <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
+                </div>
+                <input
+                    className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
+                    type="checkbox" id="cheap" name="cheap" />
+                <div>Cheap</div>
+            </label>
+            {/* <div>Range Price</div>
+                            <label htmlFor="">
+                                <input className="w-[100%]" type="range" name="price" id="price" min="5.000" max="1.000.000" step="" />
+                            </label> */}
+            <button className="rounded-[8px] bg-[#FF8906] py-[10px]"  type="submit">Apply Filter</button>
+
+            {/* {filteredProducts.map((product) => (
+                <div key={product.id}>
+                    {product.name} - {product.type}
+                </div> */}
+        </form>
                     </div>
                     <div className="flex-1 flex flex-col gap-[50px] pt-[75px]">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">

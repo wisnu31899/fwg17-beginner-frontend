@@ -4,7 +4,46 @@ import Footer from "../components/Footer"
 import { FiUser, FiMapPin, FiPhoneCall, FiCreditCard, FiTruck, FiRepeat } from "react-icons/fi"
 import cp1 from "../assets/images/cphead1.png"
 
-const DetailOrder = () => {
+import React,{useState,useEffect} from "react"
+import axios from "axios"
+import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux"
+
+const detailOrder = () => {
+
+    const token = useSelector(state => state.auth.token)
+    const user = useSelector(state => state.profile.data)
+    const [order, setOrder] = useState([{}])
+    const [detailOrder, setDetailOrder] = useState([{}])
+    
+    const {id} = useParams()
+    const getOrder = async (id) =>{
+        const {data} = await axios.get(`http://localhost:5050/customer/orders/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(data.results[0])
+        if(data.success){
+            setOrder(data.results[0])
+        }
+    }
+    const getDetail = async (id) =>{
+        const {data} = await axios.get(`http://localhost:5050/customer/orderDetails/detail/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(data.result)
+        if(data.success){
+            setDetailOrder(data.result)
+            // console.log(setDetailOrder)
+        }
+    }
+    useEffect(() => {
+        getOrder(id)
+        getDetail(id)
+    },[id, token])
     return (
         <>
             <Navbar />
@@ -12,7 +51,7 @@ const DetailOrder = () => {
                 <div className=" max-w-[700px] w-full flex justify-center md:justify-end items-center">
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="flex flex-col gap-[5px]">
-                            <div className="text-[#0B0909] text-[48px] font-bold">Order #12354-09893</div>
+                            <div className="text-[#0B0909] text-[48px] font-bold">Order {order && order.orderNumber}</div>
                             <div>21 March 2023 at 10:30 AM</div>
                         </div>
                         <div className="flex justify-between gap-[50px]">
@@ -21,15 +60,15 @@ const DetailOrder = () => {
                         <div className="flex flex-col">
                             <div className="flex justify-between pb-[15px] border-b-2">
                                 <div className="flex gap-[10px]"><FiUser className="mt-[3px]"/>Full Name</div>
-                                <div className="text-[#0B132A] font-bold">Ghaluh Wizard Anggoro</div>
+                                <div className="text-[#0B132A] font-bold">{order && order.fullName}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
                                 <div className="flex gap-[10px]"><FiMapPin className="mt-[3px]"/>Address</div>
-                                <div className="text-[#0B132A] font-bold">Griya bandung indah</div>
+                                <div className="text-[#0B132A] font-bold">{order && order.address}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
                                 <div className="flex gap-[10px]"><FiPhoneCall className="mt-[3px]"/>Phone</div>
-                                <div className="text-[#0B132A] font-bold">082116304338</div>
+                                <div className="text-[#0B132A] font-bold">{user.phoneNumber}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
                                 <div className="flex gap-[10px]"><FiCreditCard className="mt-[3px]"/>Payment Method</div>
@@ -41,11 +80,11 @@ const DetailOrder = () => {
                             </div>
                             <div className="flex justify-between items-center py-[10px] border-b-2">
                                 <div className="flex gap-[10px]"><FiRepeat className="mt-[3px]"/>Status</div>
-                                <div className="p-[10px] rounded-[20px] bg-green-100  text-[#00A700] font-bold">Done</div>
+                                <div className="p-[10px] rounded-[20px] bg-orange-100  text-[orange] font-bold">{order && order.status}</div>
                             </div>
                             <div className="flex justify-between py-[20px]">
                                 <div className="flex gap-[10px]">Total Transaksi</div>
-                                <div className="text-[#FF8906] font-bold">Idr 40.000</div>
+                                <div className="text-[#FF8906] font-bold">{order && order.total && `Rp ${order.total.toLocaleString('id-ID')}`}</div>
                             </div>
                         </div>
                     </div>
@@ -54,46 +93,24 @@ const DetailOrder = () => {
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={`http://localhost:5050/uploads/products/${detailOrder.productImage}`} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
                                     FLASH SALE!</div>
-                                <div className="text-[#0B0909] text-[18px] font-bold">Hazelnut Latte</div>
+                                <div className="text-[#0B0909] text-[18px] font-bold">{detailOrder.productName}</div>
                                 <div className="flex gap-[10px] items-center">
-                                    <div>2pcs</div>
+                                    <div>1pcs</div>
                                     <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Regular</div>
+                                    <div>{detailOrder.productSize}</div>
                                     <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Ice</div>
+                                    <div>{detailOrder.productVariant}</div>
                                     <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
                                     <div>Dine In</div>
                                 </div>
                                 <div className="flex items-center gap-[10px]">
-                                    <div className="line-through font-bold text-[12px] text-[#D00000]">IDR 40.000</div>
-                                    <div className="text-[22px] font-bold text-[#FF8906]">IDR 20.000</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src={cp1} alt="" /></div>
-                            <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
-                                <div
-                                    className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="text-[#0B0909] text-[18px] font-bold">Hazelnut Latte</div>
-                                <div className="flex gap-[10px] items-center">
-                                    <div>2pcs</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Regular</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Ice</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Dine In</div>
-                                </div>
-                                <div className="flex items-center gap-[10px]">
-                                    <div className="line-through font-bold text-[12px] text-[#D00000]">IDR 40.000</div>
-                                    <div className="text-[22px] font-bold text-[#FF8906]">IDR 20.000</div>
+                                    {/* <div className="line-through font-bold text-[12px] text-[#D00000]">0</div> */}
+                                    <div className="text-[22px] font-bold text-[#FF8906]">{order && order.total && `Rp ${order.total.toLocaleString('id-ID')}`}</div>
                                 </div>
                             </div>
                         </div>
@@ -105,4 +122,4 @@ const DetailOrder = () => {
     )
 }
 
-export default DetailOrder
+export default detailOrder

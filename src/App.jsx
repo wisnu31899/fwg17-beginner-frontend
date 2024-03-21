@@ -58,8 +58,8 @@ path: '/product/:id',
 element: <DetailProduct/>
 },
 {
-  path: '/detailorder',
-  element: <DetailOrder />
+  path: '//customer/orders/:id',
+  element: (<PrivateRoute><DetailOrder /></PrivateRoute>)
 },
 {
   path: '/checkoutproduct',

@@ -11,11 +11,11 @@ import GOPAY from "../assets/images/GOPAY.svg"
 import DANA from "../assets/images/DANA.png"
 import axios from "axios"
 import React from "react"
-import { useSelector } from "react-redux"
-// import { decToCart as actionDecToCart } from "../redux/reducers/cart"
+import { useSelector, useDispatch } from "react-redux"
+import { decToCart as actionDecToCart } from "../redux/reducers/cart"
 
 const CheckoutProduct = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     // const procesCheckout = () => {
     //     // setToken(null)
@@ -31,48 +31,67 @@ const CheckoutProduct = () => {
     }, 0)
     const tax = orderTotal * 0.1
     const total = orderTotal + tax
+    console.log(orderTotal)
+    // console.log(total)
+
+    // console.log(useSelector(state => state.cart.data[0].product.id))
+    // console.log(useSelector(state => state.cart.data[0].variant.id))
+    // console.log(useSelector(state => state.cart.data[0].size.id))
 
     const processOrder = async (e) => {
-        e.preventDefault();
-        const { value: address } = e.target.address;
-        const { value: fullName } = e.target.fullName;
-        const { value: email } = e.target.email;
-        const userId = user
-        const totalOrder = total
+        try{
+            e.preventDefault();
+            const { value: address } = e.target.address;
+            const { value: fullName } = e.target.fullName;
+            const { value: email } = e.target.email;
+            const userId = user
+            const totalOrder = total
+            console.log(total)
 
-        const form = new URLSearchParams();
-        form.append('userId', userId); // Anda perlu mendapatkan userId dari Redux atau tempat penyimpanan data lainnya
-        form.append('orderNumber', null); // Anda perlu membuat nomor pesanan secara otomatis atau mendapatkannya dari server
-        form.append('promoId', null); // Jika ada promo, Anda perlu mendapatkannya dari pengguna atau server
-        form.append('total', totalOrder); // Anda perlu menghitung total dari keranjang belanja
-        form.append('taxAmount', null); // Jika Anda ingin menghitung pajak, Anda dapat melakukannya di sini
-        form.append('status', 'ON-PROCCESS'); // Status pesanan, bisa pending, processing, atau lainnya sesuai kebutuhan
-        form.append('address', address);
-        form.append('fullName', fullName);
-        form.append('email', email);
+            const form = new URLSearchParams();
+            form.append('userId', userId); // Anda perlu mendapatkan userId dari Redux atau tempat penyimpanan data lainnya
+            form.append('total', totalOrder); // Anda perlu menghitung total dari keranjang belanja
+            form.append('address', address);
+            form.append('fullName', fullName);
+            form.append('email', email);
 
-        const { data } = await axios.post('http://localhost:5050/customer/orders', form.toString(), {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+            const { data: order } = await axios.post('http://localhost:5050/customer/orders', form.toString(), {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
 
-        console.log(data);
-        setTimeout(() => {
-            navigate('/historyorder')
-            }, 3000);
+
+            const formOrderDetail = new URLSearchParams();
+            formOrderDetail.append('productId', cart[0].product.id); // Anda perlu mendapatkan userId dari Redux atau tempat penyimpanan data lainnya
+            formOrderDetail.append('productSizeId', cart[0].size.id); // Anda perlu menghitung total dari keranjang belanja
+            formOrderDetail.append('productVariantId', cart[0].variant.id);
+            formOrderDetail.append('orderId', order.results.id);
+            formOrderDetail.append('subTotal', orderTotal);
+
+            const {data: orderDetail} = await axios.post('http://localhost:5050/customer/orderDetails', formOrderDetail.toString(), {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(orderDetail);
+
+            setTimeout(() => {
+                 dispatch(actionDecToCart())
+                navigate('/historyorder')
+                }, 3000);
+        }catch(err){
+            console.log(err)
+        }
     };
 
     React.useEffect(() => {
         window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "smooth",
+            top: 0,
+            left: 0,
+            behavior: "smooth",
         });
-    
-        processOrder()
-      }, [])
-
+    }, [])
 
     return (
         <>
@@ -91,7 +110,7 @@ const CheckoutProduct = () => {
                             <div>
                                 {cart.map(product => (
                                     <div key={`product_${product.product.id}`} className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                                        <div className=""><img width="170px" height="170px" src={product.product.image} alt="" /></div>
+                                        <div className=""><img width="170px" height="170px" src={`http://localhost:5050/uploads/products/${product.product.image}`} alt="" /></div>
                                         <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                             <div className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
                                                 FLASH SALE!</div>
