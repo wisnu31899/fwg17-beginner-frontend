@@ -2,6 +2,7 @@
   "name": "beginner-frontend",
   "private": true,
   "version": "0.0.0",
+  "proxy": "https://fwg17-backend-beginner-mu.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite --port 4000",
