@@ -58,7 +58,7 @@ const Navbar = () => {
     //get profile
     const getProfile = async () => {
         if (token) {
-            const { data } = await axios.get('http://localhost:5050/profile', {
+            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/profile`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -130,7 +130,7 @@ const Navbar = () => {
                                     <Link to="/profile">
                                         <div className="md:block hidden bg-transparent px-1 md:w-[40px] h-[40px] rounded-full md:w-full">
                                             {user.picture ? (
-                                                <img className="h-[40px] w-[45px] rounded-full" src={`http://localhost:5050/uploads/profile/${user.picture}`} alt="" />
+                                                <img className="h-[40px] w-[45px] rounded-full" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/profile/${user.picture}`} alt="" />
                                             ) : (
                                                 <img className="h-[40px] w-[45px] rounded-full" src={defaultItems} alt="" />
                                             )}

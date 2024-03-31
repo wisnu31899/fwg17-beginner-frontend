@@ -55,7 +55,7 @@ const CheckoutProduct = () => {
             form.append('fullName', fullName);
             form.append('email', email);
 
-            const { data: order } = await axios.post('http://localhost:5050/customer/orders', form.toString(), {
+            const { data: order } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/customer/orders`, form.toString(), {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -69,7 +69,7 @@ const CheckoutProduct = () => {
             formOrderDetail.append('orderId', order.results.id);
             formOrderDetail.append('subTotal', orderTotal);
 
-            const {data: orderDetail} = await axios.post('http://localhost:5050/customer/orderDetails', formOrderDetail.toString(), {
+            const {data: orderDetail} = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/customer/orderDetails`, formOrderDetail.toString(), {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -110,7 +110,7 @@ const CheckoutProduct = () => {
                             <div>
                                 {cart.map(product => (
                                     <div key={`product_${product.product.id}`} className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                                        <div className=""><img width="170px" height="170px" src={`http://localhost:5050/uploads/products/${product.product.image}`} alt="" /></div>
+                                        <div className=""><img width="170px" height="170px" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.product.image}`} alt="" /></div>
                                         <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                             <div className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
                                                 FLASH SALE!</div>

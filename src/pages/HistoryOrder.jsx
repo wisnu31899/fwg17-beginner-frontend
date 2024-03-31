@@ -16,7 +16,7 @@ const HistoryOrder = () => {
 
     const getOrder = async () => {
         try{
-            const { data } = await axios.get('http://localhost:5050/customer/orders', {
+            const { data } = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/customer/orders`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

@@ -30,7 +30,7 @@ const Register = () => {
             return
         }
         try{
-            const {data} = await axios.post('http://localhost:5050/auth/register', form.toString())
+            const {data} = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/auth/register`, form.toString())
             setSuccessMessage('register berhasil')
             setErrorMessage(null)
             console.log(data)

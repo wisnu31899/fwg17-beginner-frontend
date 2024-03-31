@@ -38,7 +38,7 @@ const Login = () => {
         const form = new URLSearchParams()
         form.append('email', email)
         form.append('password', password)
-            const { data } = await axios.post('http://localhost:5050/auth/login', form.toString())
+            const { data } = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/auth/login`, form.toString())
             setSuccessMessage(data.message)
             const { token: resultToken } = data.results
             setErrorMessage(null)

@@ -24,7 +24,7 @@ const DetailProduct = () => {
     
     const {id} = useParams()
     const getDetailProduct = async (id) =>{
-        const {data} = await axios.get(`http://localhost:5050/products/${id}`)
+        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products/${id}`)
         if(data.success){
             setProduct(data.results)
             setLocalSelector({
@@ -138,7 +138,7 @@ const DetailProduct = () => {
             <header className=" flex flex-col md:flex-row h-screen my-[50px]">
                 <div className="flex-1 flex justify-center md:justify-end items-center">
                     <div className="w-[80%] items-center flex-col flex gap-[20px]">
-                        <div><img width="450px" src={product.image ? `http://localhost:5050/uploads/products/${product.image}` : ''} alt="" /></div>
+                        <div><img width="450px" src={product.image ? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.image}` : ''} alt="" /></div>
                         <div className="flex gap-[20px]">
                             <div><img width="135px" src={dp2} alt="" /></div>
                             <div><img width="135px" src={dp3} alt="" /></div>

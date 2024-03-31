@@ -17,7 +17,7 @@ import ellipse3 from "../assets/images/Ellipse 185.svg"
 
 //component yang diimport ke product dan detailProduct
 export const getProductUpload = async (cb, limit, page, search) => {
-    const { data } = await axios.get('http://localhost:5050/products', {
+    const { data } = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/products`, {
         params: {
             // bestSeller: true,
             limit,

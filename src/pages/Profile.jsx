@@ -24,7 +24,7 @@ const Profile = () => {
     //get profile
     const getProfile = async () => {
         if (token) {
-            const { data } = await axios.get('http://localhost:5050/profile', {
+            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/profile`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -74,7 +74,7 @@ const Profile = () => {
         //     form.append('address', e.target.address.value)
         // }
         try{
-            const { data } = await axios.patch('http://localhost:5050/profile', form, {
+            const { data } = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/profile`, form, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -102,7 +102,7 @@ const Profile = () => {
             if (file) {
                 const form = new FormData()
                 form.append('picture', file)
-                const { data } = await axios.patch('http://localhost:5050/profile', form, {
+                const { data } = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/profile`, form, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${token}`
@@ -137,7 +137,7 @@ const Profile = () => {
                             <div>{user.email}</div>
                             <label className=" px-[10px]">
                                 {(user.picture && !preview) ? (
-                                    <img className="h-[150px] w-[150px] rounded-full" src={`http://localhost:5050/uploads/profile/${user.picture}`} alt="" />
+                                    <img className="h-[150px] w-[150px] rounded-full" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/profile/${user.picture}`} alt="" />
                                 ) : (
                                     <>
                                         {preview ? null : (
