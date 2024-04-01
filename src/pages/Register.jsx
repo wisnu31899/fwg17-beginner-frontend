@@ -16,10 +16,12 @@ const Register = () => {
         const {value: fullName} = even.target.fullName
         const {value: email} = even.target.email
         const {value: password} = even.target.password
+        const {value: confirmPassword} = even.target.confirmPassword
         const form = new URLSearchParams()
         form.append('fullName', fullName)
         form.append('email', email)
         form.append('password', password)
+        form.append('confirmPassword', confirmPassword)
 
         if(!email){
             setErrorMessage('email tidak boleh kosong')
@@ -95,11 +97,11 @@ const Register = () => {
                                 </div>
                             </div>
                         </label>
-                        <label className="flex flex-col gap-[5px]" htmlFor="confirmpassword">
+                        <label className="flex flex-col gap-[5px]" htmlFor="confirmPassword">
                             <div className="text-[#0B132A] font-bold">Confirm Password</div>
                             <div className="border h-[40px] rounded flex items-center px-4 gap-2">
                                 <div><FiLock /></div>
-                                <input ref={inputConfirmPassword} className="w-full text-[black]" id="confirmpassword" name="confirmpassword" type={confirmPasswordVisible ? "text" : "password"} placeholder="Enter Your Confirm Password" />
+                                <input ref={inputConfirmPassword} className="w-full text-[black]" id="confirmPassword" name="confirmPassword" type={confirmPasswordVisible ? "text" : "password"} placeholder="Enter Your Confirm Password" />
                                 <div onClick={toggleConfirmPasswordVisibility}>
                                     {confirmPasswordVisible ? <FiEye /> : <FiEyeOff />}
                                 </div>
