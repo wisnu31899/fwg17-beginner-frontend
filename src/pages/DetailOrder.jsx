@@ -51,7 +51,7 @@ const detailOrder = () => {
                 <div className=" max-w-[700px] w-full flex justify-center md:justify-end items-center">
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="flex flex-col gap-[5px]">
-                            <div className="text-[#0B0909] text-[48px] font-bold">Order {order && order.orderNumber}</div>
+                            <div className="text-[#0B0909] text-[30px] font-bold">Order {order && order.orderNumber}</div>
                             <div>21 March 2023 at 10:30 AM</div>
                         </div>
                         <div className="flex justify-between gap-[50px]">
@@ -93,7 +93,7 @@ const detailOrder = () => {
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
                         <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/products/${detailOrder.productImage}`} alt="" /></div>
+                            <div className=""><img width="170px" height="170px" src={detailOrder.productImage? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${detailOrder.productImage}` : cp1} alt="" /></div>
                             <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                 <div
                                     className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">

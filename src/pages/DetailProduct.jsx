@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiShoppingCart, FiStar, FiArrowRightCircle,FiArrowLeftCircle, FiThumbsUp, FiMinus, FiPlus } from "react-icons/fi"
+import dp1 from "../assets/images/dphead1.png"
 import dp2 from "../assets/images/dphead2.png"
 import dp3 from "../assets/images/dphead3.png"
 import dp4 from "../assets/images/dphead4.png"
@@ -138,7 +139,7 @@ const DetailProduct = () => {
             <header className=" flex flex-col md:flex-row h-screen my-[50px]">
                 <div className="flex-1 flex justify-center md:justify-end items-center">
                     <div className="w-[80%] items-center flex-col flex gap-[20px]">
-                        <div><img width="450px" src={product.image ? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.image}` : ''} alt="" /></div>
+                        <div><img width="450px" src={product.image ? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.image}` : dp1} alt="" /></div>
                         <div className="flex gap-[20px]">
                             <div><img width="135px" src={dp2} alt="" /></div>
                             <div><img width="135px" src={dp3} alt="" /></div>

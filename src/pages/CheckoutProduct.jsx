@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiUser, FiPlus, FiPlusCircle, FiMail, FiMapPin } from "react-icons/fi"
-// import cp1 from "../assets/images/cphead1.png"
+import cp1 from "../assets/images/cphead1.png"
 import BRI from "../assets/images/BRI.svg"
 import BCA from "../assets/images/BCA.svg"
 import OVO from "../assets/images/OVO.svg"
@@ -110,7 +110,7 @@ const CheckoutProduct = () => {
                             <div>
                                 {cart.map(product => (
                                     <div key={`product_${product.product.id}`} className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                                        <div className=""><img width="170px" height="170px" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.product.image}`} alt="" /></div>
+                                        <div className=""><img width="170px" height="170px" src={product.product.image? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.product.image}` : cp1} alt="" /></div>
                                         <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
                                             <div className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
                                                 FLASH SALE!</div>
