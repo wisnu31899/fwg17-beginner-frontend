@@ -11,18 +11,13 @@ import GOPAY from "../assets/images/GOPAY.svg"
 import DANA from "../assets/images/DANA.png"
 import axios from "axios"
 import React from "react"
+import CheckoutItem from "../components/checkoutCard"
 import { useSelector, useDispatch } from "react-redux"
 import { decToCart as actionDecToCart } from "../redux/reducers/cart"
 
 const CheckoutProduct = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const procesCheckout = () => {
-    //     // setToken(null)
-    //     // window.localStorage.removeItem('token')
-    //     // dispatch(actionDecToCart())
-    //     navigate('/historyorder')
-    // }
     const token = useSelector(state => state.auth.token)
     const cart = useSelector(state => state.cart.data) //mapping data dari redux terkait detail product
     const user = useSelector(state => state.profile.data.id)
@@ -31,58 +26,63 @@ const CheckoutProduct = () => {
     }, 0)
     const tax = orderTotal * 0.1
     const total = orderTotal + tax
-    console.log(orderTotal)
-    // console.log(total)
-
-    // console.log(useSelector(state => state.cart.data[0].product.id))
-    // console.log(useSelector(state => state.cart.data[0].variant.id))
-    // console.log(useSelector(state => state.cart.data[0].size.id))
 
     const processOrder = async (e) => {
-        try{
+        try {
             e.preventDefault();
             const { value: address } = e.target.address;
             const { value: fullName } = e.target.fullName;
             const { value: email } = e.target.email;
-            const userId = user
-            const totalOrder = total
-            console.log(total)
-
+            const userId = user;
+            const totalOrder = total;
+    
             const form = new URLSearchParams();
-            form.append('userId', userId); // Anda perlu mendapatkan userId dari Redux atau tempat penyimpanan data lainnya
-            form.append('total', totalOrder); // Anda perlu menghitung total dari keranjang belanja
+            form.append('userId', userId);
+            form.append('total', totalOrder);
             form.append('address', address);
             form.append('fullName', fullName);
             form.append('email', email);
-
+    
             const { data: order } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/customer/orders`, form.toString(), {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            })
-
-
-            const formOrderDetail = new URLSearchParams();
-            formOrderDetail.append('productId', cart[0].product.id); // Anda perlu mendapatkan userId dari Redux atau tempat penyimpanan data lainnya
-            formOrderDetail.append('productSizeId', cart[0].size.id); // Anda perlu menghitung total dari keranjang belanja
-            formOrderDetail.append('productVariantId', cart[0].variant.id);
-            formOrderDetail.append('orderId', order.results.id);
-            formOrderDetail.append('subTotal', orderTotal);
-
-            const {data: orderDetail} = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/customer/orderDetails`, formOrderDetail.toString(), {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            console.log(orderDetail);
-
-            setTimeout(() => {
-                 dispatch(actionDecToCart())
-                navigate('/historyorder')
-                }, 3000);
-        }catch(err){
-            console.log(err)
+            });
+            console.log(order.results.id);
+            const orderId = order.results.id;
+    
+            for (let i = 0; i < cart.length; i++) {
+                const item = cart[i];
+                const formOrderDetail = new URLSearchParams(); // Membuat objek URLSearchParams baru untuk setiap iterasi
+                formOrderDetail.append('productId', item.product.id);
+                formOrderDetail.append('productSizeId', item.size.id);
+                formOrderDetail.append('productVariantId', item.variant.id);
+                formOrderDetail.append('orderId', orderId);
+                const subTotal = calculateSubTotal(item); // Menghitung subTotal untuk setiap item
+                formOrderDetail.append('subTotal', subTotal);
+                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/customer/orderDetails`, formOrderDetail.toString(), {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            }
+    
+            dispatch(actionDecToCart());
+            navigate('/historyorder');
+        } catch (err) {
+            console.log(err);
         }
+    };
+    
+    const calculateSubTotal = (item) => {
+        // Menghitung subtotal berdasarkan harga dasar produk, tambahan harga dari ukuran, dan tambahan harga dari varian
+        const productPrice = item.product.basePrice;
+        const sizeAdditionalPrice = item.size.additionalPrice || 0;
+        const variantAdditionalPrice = item.variant.additionalPrice || 0;
+    
+        const subTotal = productPrice + sizeAdditionalPrice + variantAdditionalPrice;
+        
+        return subTotal;
     };
 
     React.useEffect(() => {
@@ -108,33 +108,10 @@ const CheckoutProduct = () => {
                                     type="submit"><FiPlus />Add Menu</button></Link></div>
                             </div>
                             <div>
-                                {cart.map(product => (
-                                    <div key={`product_${product.product.id}`} className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                                        <div className=""><img width="170px" height="170px" src={product.product.image? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${product.product.image}` : cp1} alt="" /></div>
-                                        <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
-                                            <div className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
-                                                FLASH SALE!</div>
-                                            <div className="text-[#0B0909] text-[18px] font-bold">{product.product.name}</div>
-                                            <div className="flex gap-[10px] items-center">
-                                                <div>1pcs</div>
-                                                <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                                <div>{product.size.size}</div>
-                                                <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                                <div>{product.variant.name}</div>
-                                                <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                                <div>Dine In</div>
-                                            </div>
-                                            <div className="flex items-center gap-[10px]">
-                                                <div className="line-through font-bold text-[12px] text-[#D00000]">IDR 0</div>
-                                                <div className="text-[22px] font-bold text-[#FF8906]">IDR {Number(product.product.basePrice +
-                                                    product.variant.additionalPrice + product.size.additionalPrice).toLocaleString('id')}</div>
-                                            </div>
-                                        </div>
-                                        <div className="mr-[20px] text-[red]">
-                                            <FiPlusCircle />
-                                        </div>
-                                    </div>
-                                ))}
+                            {cart &&
+              cart.map((product) => (
+                <CheckoutItem key={`product_${product.product.id}`} product={product} cp1={cp1} />
+              ))}
 
                             </div>
                             <div className=" flex flex-col gap-[20px]">

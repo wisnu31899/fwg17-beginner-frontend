@@ -3,8 +3,8 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { FiUser, FiMapPin, FiPhoneCall, FiCreditCard, FiTruck, FiRepeat } from "react-icons/fi"
 import cp1 from "../assets/images/cphead1.png"
-
-import React,{useState,useEffect} from "react"
+import OrderItem from "../components/detailOrderCard"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -15,35 +15,47 @@ const detailOrder = () => {
     const user = useSelector(state => state.profile.data)
     const [order, setOrder] = useState([{}])
     const [detailOrder, setDetailOrder] = useState([{}])
-    
-    const {id} = useParams()
-    const getOrder = async (id) =>{
-        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/orders/${id}`, {
+
+    const { id } = useParams()
+    const getOrder = async (id) => {
+        const { data: order } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/orders/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
-        console.log(data.results[0])
-        if(data.success){
-            setOrder(data.results[0])
+        if (order.success) {
+            setOrder(order.results[0])
         }
-    }
-    const getDetail = async (id) =>{
-        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/orderDetails/detail/${id}`, {
+
+        const { data: orderDetail } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/customer/orderDetails/detail/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
-        console.log(data.result)
-        if(data.success){
-            setDetailOrder(data.result)
+        if (order.success) {
+            console.log(orderDetail.result)
+            setDetailOrder(orderDetail.result)
             // console.log(setDetailOrder)
         }
     }
+
     useEffect(() => {
-        getOrder(id)
-        getDetail(id)
-    },[id, token])
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        }),
+            getOrder(id)
+    }, [id, token])
+
+    //real time
+    const formatDate = (date) => {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(date).toLocaleDateString('en-US', options);
+    }
+    const formatTime = (date) => {
+        return new Date(date).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    }
     return (
         <>
             <Navbar />
@@ -52,34 +64,34 @@ const detailOrder = () => {
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="flex flex-col gap-[5px]">
                             <div className="text-[#0B0909] text-[30px] font-bold">Order {order && order.orderNumber}</div>
-                            <div>21 March 2023 at 10:30 AM</div>
+                            <div>{formatDate(Date.now())} at {formatTime(Date.now())}</div>
                         </div>
                         <div className="flex justify-between gap-[50px]">
                             <div className="text-[22px] text-[#0B132A] font-bold">Order Information</div>
                         </div>
                         <div className="flex flex-col">
                             <div className="flex justify-between pb-[15px] border-b-2">
-                                <div className="flex gap-[10px]"><FiUser className="mt-[3px]"/>Full Name</div>
+                                <div className="flex gap-[10px]"><FiUser className="mt-[3px]" />Full Name</div>
                                 <div className="text-[#0B132A] font-bold">{order && order.fullName}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><FiMapPin className="mt-[3px]"/>Address</div>
+                                <div className="flex gap-[10px]"><FiMapPin className="mt-[3px]" />Address</div>
                                 <div className="text-[#0B132A] font-bold">{order && order.address}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><FiPhoneCall className="mt-[3px]"/>Phone</div>
+                                <div className="flex gap-[10px]"><FiPhoneCall className="mt-[3px]" />Phone</div>
                                 <div className="text-[#0B132A] font-bold">{user.phoneNumber}</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><FiCreditCard className="mt-[3px]"/>Payment Method</div>
+                                <div className="flex gap-[10px]"><FiCreditCard className="mt-[3px]" />Payment Method</div>
                                 <div className="text-[#0B132A] font-bold">Cash</div>
                             </div>
                             <div className="flex justify-between py-[20px] border-b-2">
-                                <div className="flex gap-[10px]"><FiTruck className="mt-[3px]"/>Shipping</div>
+                                <div className="flex gap-[10px]"><FiTruck className="mt-[3px]" />Shipping</div>
                                 <div className="text-[#0B132A] font-bold">Dine In</div>
                             </div>
                             <div className="flex justify-between items-center py-[10px] border-b-2">
-                                <div className="flex gap-[10px]"><FiRepeat className="mt-[3px]"/>Status</div>
+                                <div className="flex gap-[10px]"><FiRepeat className="mt-[3px]" />Status</div>
                                 <div className="p-[10px] rounded-[20px] bg-orange-100  text-[orange] font-bold">{order && order.status}</div>
                             </div>
                             <div className="flex justify-between py-[20px]">
@@ -92,28 +104,12 @@ const detailOrder = () => {
                 <div className="flex flex-1 justify-center md:justify-start pt-[120px]">
                     <div className="w-[90%] flex flex-col gap-[20px]">
                         <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
-                        <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
-                            <div className=""><img width="170px" height="170px" src={detailOrder.productImage? `${import.meta.env.VITE_BACKEND_URL}/uploads/products/${detailOrder.productImage}` : cp1} alt="" /></div>
-                            <div className="flex flex-col flex-1 gap-[10px] py-[10px]">
-                                <div
-                                    className=" flex justify-center items-center text-[#FFFFFF] rounded-3xl bg-[#D00000] w-[120px] h-[35px]">
-                                    FLASH SALE!</div>
-                                <div className="text-[#0B0909] text-[18px] font-bold">{detailOrder.productName}</div>
-                                <div className="flex gap-[10px] items-center">
-                                    <div>1pcs</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>{detailOrder.productSize}</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>{detailOrder.productVariant}</div>
-                                    <div className="w-[3px] h-[20px] bg-[#4F5665]"></div>
-                                    <div>Dine In</div>
-                                </div>
-                                <div className="flex items-center gap-[10px]">
-                                    {/* <div className="line-through font-bold text-[12px] text-[#D00000]">0</div> */}
-                                    <div className="text-[22px] font-bold text-[#FF8906]">{order && order.total && `Rp ${order.total.toLocaleString('id-ID')}`}</div>
-                                </div>
-                            </div>
+                        <div className="flex flex-col justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
+                        {detailOrder.map((item, index) => (
+        <OrderItem key={index} item={item} cp1={cp1} />
+      ))}
                         </div>
+
                     </div>
                 </div>
             </header>

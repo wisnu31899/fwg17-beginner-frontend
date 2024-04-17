@@ -16,17 +16,15 @@ import ellipse2 from "../assets/images/Ellipse 184.svg"
 import ellipse3 from "../assets/images/Ellipse 185.svg"
 
 //component yang diimport ke product dan detailProduct
-export const getProductUpload = async (cb, limit, page, search) => {
+export const getProductUpload = async (cb, limit, page) => {
     const { data } = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/products`, {
         params: {
             // bestSeller: true,
             limit,
-            page,
-            search
+            page
         }
     })
     cb(data.results)
-    console.log(data.results)
 }
 
 const Home = () => {
@@ -37,6 +35,11 @@ const Home = () => {
     }])
   
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        }),
         getProductUpload(setProductUpload, 4)
     }, [])
 
