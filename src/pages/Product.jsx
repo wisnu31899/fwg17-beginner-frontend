@@ -13,9 +13,8 @@ import { CardProductDetail } from "../components/CardProduct"
 
 
 const Product = () => {
-
-   
-
+    //fitur filter kategory
+    const [kategori, setKategori] = React.useState('')
     //pemanggilan component getproductUpload dan card product by limit
     const [productUpload, setProductUpload] = useState([{
     }])
@@ -26,11 +25,12 @@ const Product = () => {
 
     const getSearchProduct = async (e, limit, page) => {
         e.preventDefault()
-        const {value: search} = e.target.search
-        const { data } = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/products`, {
+        const { value: search } = e.target.search
+        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products`, {
             params: {
                 // bestSeller: true,
                 search,
+                category: kategori,
                 limit,
                 page
             }
@@ -45,7 +45,7 @@ const Product = () => {
             behavior: "smooth",
         }),
             getProductUpload(setProductUpload, 6, currentPage)
-            getSearchProduct(6, currentPage)
+        getSearchProduct(6, currentPage)
     }, [currentPage])
 
 
@@ -65,9 +65,11 @@ const Product = () => {
         }
     };
 
-
-
-
+    const resetFilter = () => {
+        setKategori('')
+        getProductUpload(setProductUpload, 6, currentPage)
+        getSearchProduct(6, currentPage)
+    }
     // const [data, setData] = React.useState([
     //     {
     //         promo: 'FLASH SALE!',
@@ -146,7 +148,7 @@ const Product = () => {
                             className="gap-[15px] max-w-[385px] p-[30px] rounded-[16px] text-[white] bg-[black] flex flex-col">
                             <div className="flex justify-between">
                                 <div>Filter</div>
-                                <button type="reset" className="hover:text-orange-400">Reset Filter</button>
+                                <button type="reset" className="hover:text-orange-400" onClick={resetFilter}>Reset Filter</button>
                             </div>
                             <label className="flex flex-col gap-[5px]" htmlFor="search">
                                 <div>Search</div>
@@ -165,7 +167,7 @@ const Product = () => {
                             <label className=" relative flex items-center gap-[40px]" htmlFor="coffee">
                                 <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
                                 </div>
-                                <input
+                                <input onChange={() => setKategori('coffee')}
                                     className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
                                     type="checkbox" id="coffee" name="coffee" />
                                 <div>Coffee</div>
@@ -173,7 +175,7 @@ const Product = () => {
                             <label className=" relative flex items-center gap-[40px]" htmlFor="non">
                                 <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
                                 </div>
-                                <input
+                                <input onChange={() => setKategori('nonCoffe')}
                                     className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
                                     type="checkbox" id="non" name="non" />
                                 <div>Non Coffee</div>
@@ -181,7 +183,7 @@ const Product = () => {
                             <label className=" relative flex items-center gap-[40px]" htmlFor="food">
                                 <div className="flex items-center"><FiCheck size={25} className="text-[black] absolute z-10" />
                                 </div>
-                                <input
+                                <input onChange={() => setKategori('food')}
                                     className="border-2 checked:border-none rounded-[8px] absolute h-[25px] w-[25px] appearance-none checked:bg-orange-500"
                                     type="checkbox" id="food" name="food" />
                                 <div>Foods</div>
