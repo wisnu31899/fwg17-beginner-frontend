@@ -23,9 +23,12 @@ const Product = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 5;
 
-    const getSearchProduct = async (e, limit, page) => {
+    const getSearchProduct = async (e) => {
         e.preventDefault()
         const { value: search } = e.target.search
+        const page = currentPage
+        const limit = 6
+
         const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/products`, {
             params: {
                 // bestSeller: true,
@@ -45,7 +48,7 @@ const Product = () => {
             behavior: "smooth",
         }),
             getProductUpload(setProductUpload, 6, currentPage)
-        getSearchProduct(6, currentPage)
+            getSearchProduct()
     }, [currentPage])
 
 

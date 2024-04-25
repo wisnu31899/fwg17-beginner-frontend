@@ -109,8 +109,8 @@ const CheckoutProduct = () => {
                             </div>
                             <div>
                             {cart &&
-              cart.map((product) => (
-                <CheckoutItem key={`product_${product.product.id}`} product={product} cp1={cp1} />
+              cart.map((product, index) => (
+                <CheckoutItem key={`product_${product.product.id}`} product={product} cp1={cp1}  index={index} />
               ))}
 
                             </div>

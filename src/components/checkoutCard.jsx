@@ -1,8 +1,15 @@
 // Buat file baru dengan nama CheckoutItem.js
 import React from "react";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiXCircle } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { removeToCard } from "../redux/reducers/cart";
 
-const CheckoutItem = ({ product, cp1 }) => {
+const CheckoutItem = ({ product, cp1, index }) => {
+  const dispatch = useDispatch(); // Dapatkan dispatch dari Redux
+
+  const handleRemoveClick = () => {
+    dispatch(removeToCard(index)); // Panggil removeToCard dengan indeks produk
+  };
   return (
     <div className="flex justify-between items-center bg-[#E8E8E84D] gap-[20px] px-[10px] py-[10px]">
       <div className="">
@@ -47,8 +54,8 @@ const CheckoutItem = ({ product, cp1 }) => {
           </div>
         </div>
       </div>
-      <div className="mr-[20px] text-[red]">
-        <FiPlusCircle />
+      <div className="mr-[20px] text-[red]" onClick={handleRemoveClick}>
+        <FiXCircle />
       </div>
     </div>
   );
