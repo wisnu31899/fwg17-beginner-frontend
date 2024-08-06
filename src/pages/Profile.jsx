@@ -137,7 +137,7 @@ const Profile = () => {
                             <div>{user.email}</div>
                             <label className=" px-[10px]">
                                 {(user.picture && !preview) ? (
-                                    <img className="h-[150px] w-[150px] rounded-full" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/profile/${user.picture}`} alt="" />
+                                    <img className="h-[150px] w-[150px] rounded-full" src={user.picture} alt="" />
                                 ) : (
                                     <>
                                         {preview ? null : (

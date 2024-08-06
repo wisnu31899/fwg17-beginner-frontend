@@ -130,7 +130,7 @@ const Navbar = () => {
                                     <Link to="/profile">
                                         <div className="md:block hidden bg-transparent px-1 md:w-[40px] h-[40px] rounded-full md:w-full">
                                             {user.picture ? (
-                                                <img className="h-[40px] w-[45px] rounded-full" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/profile/${user.picture}`} alt="" />
+                                                <img className="h-[40px] w-[45px] rounded-full" src={user.picture} alt="" />
                                             ) : (
                                                 <img className="h-[40px] w-[45px] rounded-full" src={defaultItems} alt="" />
                                             )}
