@@ -177,9 +177,9 @@ const DetailProduct = () => {
                                 ))}
                             </div></>}
                         <div className="flex gap-[30px] justify-between">
-                            <div className="flex-1"><Link to="/checkoutproduct"><button
+                            <div className="flex-1"><button onClick={addCart}
                                 className="w-full h-[40px] border-2 font-bold hover:border-[#FF8906] hover:bg-[#FF8906] rounded-[6px]"
-                                type="submit">Buy</button></Link></div>
+                                type="submit">Buy</button></div>
                             <div className="flex-1"><button onClick={addCart}
                                 className="flex justify-center items-center gap-[10px] w-full h-[40px] border-2 hover:border-[#FF8906] font-bold text-[#FF8906] rounded-[6px]" type="submit"><FiShoppingCart size={20} />add to cart</button></div>
                         </div>
