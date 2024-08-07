@@ -123,7 +123,7 @@ const Navbar = () => {
                         <li className=" w-full md:w-auto hidden md:block">
                             <button className="flex items-center relative" onClick={() => setSearch(!search)}><input className={`${!search ? 'hidden' : ''} text-black px-1 py-1`} type="text" placeholder="Search" /><FiSearch size={30} className="text-orange-500 -ml-[30px]" /></button>
                         </li>
-                        <li className="w-full md:w-auto hidden md:block"><button onClick={reloadCheckout}><FiShoppingCart size={25} className="text-white" /></button></li>
+                        <li className="w-full md:w-auto hidden md:block"><Link to={`/CheckoutProduct`}><FiShoppingCart size={25} className="text-white" /></Link></li>
                         <li className="w-full md:w-auto">
                             <div className="w-full flex flex-col md:flex-row gap-[10px] md:w-auto">
                                 {token && <>

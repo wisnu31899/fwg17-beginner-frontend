@@ -103,7 +103,7 @@ const CheckoutProduct = () => {
                             <div className=" h-[60px] flex items-center text-[#0B0909] text-[48px] mb-[40px]">Payment Details</div>
                             <div className="flex justify-between">
                                 <div className="text-[#0B132A] font-bold text-[22px]">Your Order</div>
-                                <div><Link to="/"><button
+                                <div><Link to="/product"><button
                                     className="flex justify-center items-center gap-[10px] rounded-[6px] bg-[#FF8906] w-[125px] h-[40px] font-bold text-[#0B132A]"
                                     type="submit"><FiPlus />Add Menu</button></Link></div>
                             </div>

@@ -159,24 +159,24 @@ const Profile = () => {
                             {errorMessage && <div className="border-2 flex justify-center items-center border-red-500 py-2 bg-green-300">{errorMessage}</div>}
                             <label className="flex flex-col gap-[5px]" htmlFor="fullName">
                                 <div className="text-[#0B132A] font-bold">FullName</div>
-                                <div className="border h-[50px] rounded flex items-center px-4 gap-2">
-                                    <FiUser />
+                                <div className="border h-[50px] rounded flex items-center px-4 gap-4">
+                                    <FiUser size={25} />
                                     <input defaultValue={user.fullName} className="w-full text-[black]" type="text" id="fullName" name="fullName"
                                         placeholder="Enter Your FullName" />
                                 </div>
                             </label>
                             <label className="flex flex-col gap-[5px]" htmlFor="email">
                                 <div className="text-[#0B132A] font-bold">Email</div>
-                                <div className="border h-[50px] rounded flex items-center px-4 gap-2">
-                                    <FiMail />
+                                <div className="border h-[50px] rounded flex items-center px-4 gap-4">
+                                    <FiMail size={25}/>
                                     <input defaultValue={user.email} className="w-full text-[black]" type="email" id="email" name="email"
                                         placeholder="Enter Your Email" />
                                 </div>
                             </label>
                             <label className="flex flex-col gap-[5px]" htmlFor="phoneNumber">
                                 <div className="text-[#0B132A] font-bold">PhoneNumber</div>
-                                <div className="border h-[50px] rounded flex items-center px-4 gap-2">
-                                    <FiPhoneCall />
+                                <div className="border h-[50px] rounded flex items-center px-4 gap-4">
+                                    <FiPhoneCall size={25} />
                                     <input defaultValue={user.phoneNumber} className="w-full text-[black]" type="text" id="phoneNumber" name="phoneNumber"
                                         placeholder="Enter Your phoneNumber" />
                                 </div>
@@ -186,20 +186,20 @@ const Profile = () => {
                                     <div className="text-[#0B132A] font-bold">Password</div>
                                     <div><Link to="/forgotpassword" className="text-[#FF8906]">Set New Password</Link></div>
                                 </div>
-                                <div className="border h-[50px] rounded flex items-center px-4 gap-2">
-                                    <FiLock />
+                                <div className="border h-[50px] rounded flex items-center px-4 gap-4">
+                                    <FiLock size={25}/>
                                     <input defaultValue={user.password} className="w-full text-[black]" id="password" name="password" type={passwordVisible ? "text" : "password"} placeholder="Enter Your Password" />
                                     <div onClick={togglePasswordVisibility}>
-                                        {passwordVisible ? <FiEye /> : <FiEyeOff />}
+                                        {passwordVisible ? <FiEye size={25} /> : <FiEyeOff size={25} />}
                                     </div>
                                 </div>
                             </label>
                             <label className="flex flex-col gap-[5px]" htmlFor="address">
                                 <div className="text-[#0B132A] font-bold">Address</div>
-                                <div className="border h-[50px] rounded flex items-center px-4 gap-2">
-                                    <FiMapPin />
-                                    <textarea defaultValue={user.address} className="w-full text-[black]" type="text" id="address" name="address"
-                                        placeholder="Enter Your Address"></textarea>
+                                <div className="border h-[50px] rounded flex items-center px-4 gap-4">
+                                    <FiMapPin size={25} />
+                                    <input defaultValue={user.address} className="w-full text-[black]" type="text" id="address" name="address"
+                                        placeholder="Enter Your Address"></input>
                                 </div>
                             </label>
                             <button className="font-bold w-full bg-[#FF8906] text-[#0B132A] py-[12px]
